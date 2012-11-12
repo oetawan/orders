@@ -18,17 +18,41 @@ namespace order.web
                 "~/Scripts/jquery-{version}.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jsextlibs").Include(
-               "~/Scripts/bootstrap.min.js"));
+                "~/Scripts/jquery.unobtrusive*",
+                "~/Scripts/jquery.validate*",
+                "~/Scripts/jquery.blockUI.js",
+                "~/Scripts/jquery.form.js",
+                "~/Scripts/jquery.mousewheel.js",
+                "~/Scripts/jquery.scrollTo.js",
+                "~/Scripts/bootstrap.js",
+                "~/Scripts/bootstrap-datepicker.js",
+                "~/Scripts/bootmetro.js",
+                "~/Scripts/bootmetro-charms.js",
+                "~/Scripts/daterangepicker.js",
+                "~/Scripts/holder.js",
+                "~/Scripts/mustache.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
-                        "~/Scripts/jquery-ui-{version}.js"));
+            /*bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
+                        "~/Scripts/jquery-ui-{version}.js"));*/
 
-            bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
+            /*bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.unobtrusive*",
-                        "~/Scripts/jquery.validate*"));
+                        "~/Scripts/jquery.validate*"));*/
 
-            bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/metro-bootstrap.css"));
+            bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/site.css")); 
+            bundles.Add(new StyleBundle("~/Content/css/base").Include("~/Content/base.css"));
+            bundles.Add(new StyleBundle("~/Content/themes/bootmetro/css").Include(
+                "~/Content/themes/bootmetro/css/bootstrap.css",
+                "~/Content/themes/bootmetro/css/bootstrap-responsive.css",
+                "~/Content/themes/bootmetro/css/bootmetro.css",
+                "~/Content/themes/bootmetro/css/bootmetro-tiles.css",
+                "~/Content/themes/bootmetro/css/bootmetro-charms.css",
+                "~/Content/themes/bootmetro/css/metro-ui-light.css",
+                "~/Content/themes/bootmetro/css/icomoon.css",
+                "~/Content/themes/bootmetro/css/datepicker.css",
+                "~/Content/themes/bootmetro/css/daterangepicker.css"));
 
+            /*bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/site.css"));
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(
                         "~/Content/themes/base/jquery.ui.core.css",
                         "~/Content/themes/base/jquery.ui.resizable.css",
@@ -41,7 +65,7 @@ namespace order.web
                         "~/Content/themes/base/jquery.ui.tabs.css",
                         "~/Content/themes/base/jquery.ui.datepicker.css",
                         "~/Content/themes/base/jquery.ui.progressbar.css",
-                        "~/Content/themes/base/jquery.ui.theme.css"));
+                        "~/Content/themes/base/jquery.ui.theme.css"));*/
         }
     }
 }

@@ -1,0 +1,14 @@
+﻿body {
+    position: relative;
+}
+
+h1.top-header a:active, h1.top-header a, h2.top-header a:active, h2.top-header a
+{
+    text-decoration: none;
+    color: #2E63CC;
+}
+
+h1.top-header a:hover, h2.top-header a:hover
+{
+    border-bottom: 5px solid #F30;
+}

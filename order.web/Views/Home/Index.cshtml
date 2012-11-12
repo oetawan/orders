@@ -1,45 +1,51 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    Layout = null;
 }
-@section featured {
-    <section class="featured">
-        <div class="content-wrapper">
-            <hgroup class="title">
-                <h1>@ViewBag.Title.</h1>
-                <h2>@ViewBag.Message</h2>
-            </hgroup>
-            <p>
-                To learn more about ASP.NET MVC visit
-                <a href="http://asp.net/mvc" title="ASP.NET MVC Website">http://asp.net/mvc</a>.
-                The page features <mark>videos, tutorials, and samples</mark> to help you get the most from ASP.NET MVC.
-                If you have any questions about ASP.NET MVC visit
-                <a href="http://forums.asp.net/1146.aspx/1?MVC" title="ASP.NET MVC Forum">our forums</a>.
-            </p>
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+        <title>@ViewBag.Title - Home</title>
+        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+        <meta name="viewport" content="width=device-width" />
+        @Styles.Render("~/Content/themes/bootmetro/css")
+        @Styles.Render("~/Content/css/base")
+        @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <header id="nav-bar" class="container-fluid">
+    <div class="row-fluid">
+        <div class="span8"> 
+            <div id="header-container">
+                <h1 class="top-header"><a href="#">Zain Order</a></h1>
+            </div>
         </div>
-    </section>
-}
-<h3>We suggest the following:</h3>
-<ol class="round">
-    <li class="one">
-        <h5>Getting Started</h5>
-        ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-        enables a clean separation of concerns and that gives you full control over markup
-        for enjoyable, agile development. ASP.NET MVC includes many features that enable
-        fast, TDD-friendly development for creating sophisticated applications that use
-        the latest web standards.
-        <a href="http://go.microsoft.com/fwlink/?LinkId=245151">Learn more…</a>
-    </li>
-
-    <li class="two">
-        <h5>Add NuGet packages and jump-start your coding</h5>
-        NuGet makes it easy to install and update free libraries and tools.
-        <a href="http://go.microsoft.com/fwlink/?LinkId=245153">Learn more…</a>
-    </li>
-
-    <li class="three">
-        <h5>Find Web Hosting</h5>
-        You can easily find a web hosting company that offers the right mix of features
-        and price for your applications.
-        <a href="http://go.microsoft.com/fwlink/?LinkId=245157">Learn more…</a>
-    </li>
-</ol>
+        <div id="top-info" class="pull-right">
+           <a href="#" class="pull-left">
+               <div class="top-info-block">
+                   <h3>@User.Identity.Name</h3>
+                   <h4>Super User</h4>
+               </div>
+               <div class="top-info-block">
+                   <b class="icon-user"></b>
+               </div>
+           </a>
+           <hr class="separator pull-left">
+           <div class="dropdown">
+            <a class="header-dropdown dropdown-toggle accent-color settings pull-left" data-toggle="dropdown" href="#">
+               <b class="icon-settings"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a href="#">Change Password</a></li>
+                <li><a href="#">Log Out</a></li>
+            </ul>
+            </div>
+      </div>
+   </div>
+   </header>
+   @Scripts.Render("~/bundles/jquery")
+   @Scripts.Render("~/bundles/jsextlibs")
+</body>
+</html>
