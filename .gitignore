@@ -13,7 +13,6 @@ deploy
 *.tmp
 .DS_Store
 .tmp*~
-*.local.*
 .pinf-*
 _ReSharper.*
 *.resharper
