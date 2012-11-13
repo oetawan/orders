@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>1.8</ProductVersion>
-    <ProjectGuid>88de0168-082c-4370-ae91-8f695e3277c8</ProjectGuid>
+    <ProjectGuid>a5b895fa-9d57-4a63-a535-c033aea2303c</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>order.web.Azure</RootNamespace>
@@ -50,7 +50,7 @@
     <Folder Include="Profiles" />
   </ItemGroup>
   <ItemGroup>
-    <PublishProfile Include="Profiles\purchaseorderProduction.azurePubxml" />
+    <PublishProfile Include="Profiles\ordersProduction.azurePubxml" />
   </ItemGroup>
   <!-- Import the target files for this project template -->
   <PropertyGroup>

@@ -42,9 +42,10 @@ namespace order.web
                         "~/Scripts/jquery.unobtrusive*",
                         "~/Scripts/jquery.validate*"));*/
 
-            bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/site.css")); 
+            bundles.Add(new StyleBundle("~/Content/css").Include(
+                "~/Content/site.css")); 
             bundles.Add(new StyleBundle("~/Content/css/base").Include("~/Content/base.css"));
-            bundles.Add(new StyleBundle("~/Content/bootmetro/css").Include(
+            bundles.Add(new StyleBundle("~/Content/css/bootmetro").Include(
                 "~/Content/bootmetro/css/bootstrap.css",
                 "~/Content/bootmetro/css/bootstrap-responsive.css",
                 "~/Content/bootmetro/css/bootmetro.css",
