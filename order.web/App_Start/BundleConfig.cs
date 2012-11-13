@@ -32,6 +32,9 @@ namespace order.web
                 "~/Scripts/holder.js",
                 "~/Scripts/mustache.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/jsapp").Include(
+                "~/Scripts/app/home.js"));
+
             /*bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
                         "~/Scripts/jquery-ui-{version}.js"));*/
 
@@ -41,16 +44,16 @@ namespace order.web
 
             bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/site.css")); 
             bundles.Add(new StyleBundle("~/Content/css/base").Include("~/Content/base.css"));
-            bundles.Add(new StyleBundle("~/Content/themes/bootmetro/css").Include(
-                "~/Content/themes/bootmetro/css/bootstrap.css",
-                "~/Content/themes/bootmetro/css/bootstrap-responsive.css",
-                "~/Content/themes/bootmetro/css/bootmetro.css",
-                "~/Content/themes/bootmetro/css/bootmetro-tiles.css",
-                "~/Content/themes/bootmetro/css/bootmetro-charms.css",
-                "~/Content/themes/bootmetro/css/metro-ui-light.css",
-                "~/Content/themes/bootmetro/css/icomoon.css",
-                "~/Content/themes/bootmetro/css/datepicker.css",
-                "~/Content/themes/bootmetro/css/daterangepicker.css"));
+            bundles.Add(new StyleBundle("~/Content/bootmetro/css").Include(
+                "~/Content/bootmetro/css/bootstrap.css",
+                "~/Content/bootmetro/css/bootstrap-responsive.css",
+                "~/Content/bootmetro/css/bootmetro.css",
+                "~/Content/bootmetro/css/bootmetro-tiles.css",
+                "~/Content/bootmetro/css/bootmetro-charms.css",
+                "~/Content/bootmetro/css/metro-ui-light.css",
+                "~/Content/bootmetro/css/icomoon.css",
+                "~/Content/bootmetro/css/datepicker.css",
+                "~/Content/bootmetro/css/daterangepicker.css"));
 
             /*bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/site.css"));
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(

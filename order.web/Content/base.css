@@ -6,9 +6,34 @@ h1.top-header a:active, h1.top-header a, h2.top-header a:active, h2.top-header a
 {
     text-decoration: none;
     color: #2E63CC;
+    opacity: 0.8;
 }
 
 h1.top-header a:hover, h2.top-header a:hover
 {
-    border-bottom: 5px solid #F30;
+    opacity: 1;
+}
+
+a#settings:hover
+{
+    cursor: pointer;
+}
+
+ul.settings-menu 
+{
+    margin-top: 20px;
+}
+
+ul.settings-menu li
+{
+    list-style-type: none;
+    margin-bottom: 10px;
+}
+ul.settings-menu li button, ul.settings-menu li a
+{
+    width: 200px;
+}
+ul.settings-menu li button:hover, ul.settings-menu li a:hover
+{
+    background-color: azure;
 }
