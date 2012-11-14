@@ -37,3 +37,19 @@ ul.settings-menu li button:hover, ul.settings-menu li a:hover
 {
     background-color: azure;
 }
+
+h1.customer-list-header, h2.customer-list-header, h3.customer-list-header  
+{
+    margin: 0;
+    color: #5A5A5A;
+}
+
+hr.customer-list-header-separator 
+{
+    margin-top: 5px;
+}
+
+div#listContent 
+{
+
+}

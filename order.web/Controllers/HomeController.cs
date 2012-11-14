@@ -1,4 +1,5 @@
-﻿using System;
+﻿using order.data.contract;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -9,11 +10,16 @@ namespace order.web.Controllers
     [Authorize]
     public class HomeController : Controller
     {
+        private order.data.contract.IOrderUow Uow { get; set; }
+        public HomeController(IOrderUow uow)
+        {
+            Uow = uow;
+        }
         public ActionResult Index()
         {
-            ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
+            ViewBag.Message = "Customers";
 
-            return View();
+            return View(Uow.Customers.GetAll());
         }
 
         public ActionResult About()
