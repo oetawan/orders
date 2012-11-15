@@ -45,10 +45,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EFRepository.cs" />
-    <Compile Include="Migrations\201211131836160_AddRegisteredColumn.cs" />
-    <Compile Include="Migrations\201211131836160_AddRegisteredColumn.Designer.cs">
-      <DependentUpon>201211131836160_AddRegisteredColumn.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\OrderDbInitializer.cs" />
     <Compile Include="OrderDbContext.cs" />
@@ -68,11 +64,6 @@
       <Project>{631c2cb5-d785-4fb5-84ec-4d7826b89baa}</Project>
       <Name>order.model</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201211131836160_AddRegisteredColumn.resx">
-      <DependentUpon>201211131836160_AddRegisteredColumn.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -15,13 +15,13 @@ namespace order.data.Migrations
 
         protected override void Seed(order.data.OrderDbContext context)
         {
-            context.Customers.AddOrUpdate(cs => cs.LicenseId,
-                new Customer { LicenseId = "1234567890", BranchCode = "BTM", CustomerCode = "MCD", Name = "Mc Donald", Registered = false },
-                new Customer { LicenseId = "1348348748", BranchCode = "BAL", CustomerCode = "MCD", Name = "Mc Donald", Registered = false },
-                new Customer { LicenseId = "5989859477", BranchCode = "BDG", CustomerCode = "MCD", Name = "Mc Donald", Registered = false },
-                new Customer { LicenseId = "4938493889", BranchCode = "SBY", CustomerCode = "MCD", Name = "Mc Donald", Registered = false },
-                new Customer { LicenseId = "9898434389", BranchCode = "MDN", CustomerCode = "MCD", Name = "Mc Donald", Registered = false });
-           
+            context.Customers.AddOrUpdate(cs => cs.LicenseId, 
+                new Customer { LicenseId = "1234567890", CustomerCode = "MCD", CustomerName = "Mc Donald", Registered = false },
+                new Customer { LicenseId = "1348348748", CustomerCode = "KFC", CustomerName = "Kentucy Fried Chikend", Registered = false },
+                new Customer { LicenseId = "5989859477", CustomerCode = "PIZ", CustomerName = "Pizza Hut", Registered = false },
+                new Customer { LicenseId = "4938493889", CustomerCode = "AWE", CustomerName = "A.W", Registered = false },
+                new Customer { LicenseId = "9898434389", CustomerCode = "SBC", CustomerName = "Starbuck Coffee", Registered = false });
+            
             //  This method will be called after migrating to the latest version.
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 

@@ -49,7 +49,38 @@ hr.customer-list-header-separator
     margin-top: 5px;
 }
 
-div#listContent 
+header.zain-title 
 {
+    color: #5A5A5A;
+    margin-bottom: 10px;
+}
 
+.listview-container.grid-layout.zain-listview-container 
+{
+    height: auto;
+}
+.mediumListIconTextItem.zain-listviewitem 
+{
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+}
+.zain-action-group 
+{
+    margin-top: 14px;
+}
+
+h1.zain-heading, h2.zain-heading, h3.zain-heading, h4.zain-heading, h5.zain-heading, h6.zain-heading 
+{
+    color: #5A5A5A;
+}
+
+li.active.zain-nav-button
+{
+    /*background-image: -moz-linear-gradient(top, #2E63CC, #2E63CC);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#2E63CC), to(#2E63CC));
+    background-image: -webkit-linear-gradient(top, #2E63CC, #2E63CC);
+    background-image: -o-linear-gradient(top, #2E63CC, #2E63CC);
+    background-image: linear-gradient(to bottom, #2E63CC, #2E63CC);
+    background-repeat: repeat-x;*/
 }

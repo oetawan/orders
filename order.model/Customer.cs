@@ -18,21 +18,15 @@ namespace order.model
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 3)]
-        [Display(Name = "Branch Code")]
-        [DataType(DataType.Text)]
-        public string BranchCode { get; set; }
-
-        [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 3)]
         [Display(Name = "Customer Code")]
         [DataType(DataType.Text)]
         public string CustomerCode { get; set; }
 
         [Required]
-        [Display(Name = "Name")]
+        [Display(Name = "Customer Name")]
         [DataType(DataType.Text)]
-        public string Name { get; set; }
-
+        public string CustomerName { get; set; }
+        
         public bool Registered { get; set; }
     }
 }
