@@ -14,6 +14,7 @@ namespace order.model
         [Required]
         [Display(Name = "License Id")]
         [DataType(DataType.Text)]
+        [StringLength(300)]
         public string LicenseId { get; set; }
 
         [Required]
@@ -26,6 +27,22 @@ namespace order.model
         [Display(Name = "Customer Name")]
         [DataType(DataType.Text)]
         public string CustomerName { get; set; }
+
+        [Required]
+        [Display(Name= "Service Bus Namespace")]
+        [DataType(DataType.Text)]
+        [StringLength(300)]
+        public string ServiceBusNamespace { get; set; }
+
+        [Required]
+        [Display(Name = "Issuer")]
+        [DataType(DataType.Text)]
+        public string Issuer { get; set; }
+
+        [Required]
+        [Display(Name = "Secret Key")]
+        [DataType(DataType.Text)]
+        public string SecretKey { get; set; }
         
         public bool Registered { get; set; }
     }

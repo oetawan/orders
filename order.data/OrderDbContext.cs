@@ -17,6 +17,8 @@ namespace order.data
         }
 
         public DbSet<Customer> Customers { get; set; }
+        public DbSet<UserCustomerMapping> UserCustomerMapping { get; set; }
+        public DbSet<Branch> Branches { get; set; }
         
         static OrderDbContext()
         {

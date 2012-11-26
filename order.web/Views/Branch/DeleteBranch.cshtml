@@ -1,0 +1,53 @@
+﻿@model order.model.Branch
+
+@{
+    Layout = "~/Views/Shared/_LayoutApp.cshtml";
+}
+@section navbar
+{
+    <div class="navbar">
+        <div class="navbar-inner">
+            <div class="container">
+                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
+                <a class="brand" href="#"><span aria-hidden="true" data-icon=""></span> Delete Branch</a>
+                <div class="nav-collapse collapse pull-right">
+                    <ul class="nav">
+                        <li class="divider-vertical"></li>
+                        <li><a href="/Branch/Index"><i aria-hidden="true" data-icon=""></i> <strong>All Branches</strong></a></li>
+                    </ul>
+                </div>
+            </div><!-- end of container-->
+        </div><!-- end of navbar-inner-->
+    </div><!-- end of navbar-->
+}
+<div class="metro span12 well">
+    <h3>Are you sure you want to delete this <i aria-hidden="true" data-icon=""></i></h3>
+    <hr />
+    <blockquote>
+        <p>@Model.BranchName</p>
+        <small>Name</small>
+    </blockquote>
+    <blockquote>
+        <p>@Model.BranchCode</p>
+        <small>Code</small>
+    </blockquote>
+    <blockquote>
+        <p>@Model.Username</p>
+        <small>User Name</small>
+    </blockquote>
+    
+    @using (Html.BeginForm("ConfirmDeleteBranch", "Branch")) {
+        @Html.HiddenFor(model => model.Id)
+        @Html.AntiForgeryToken()
+        <div class="form-actions">
+            <button type="submit" class="btn btn-danger">Delete</button>
+            @Html.ActionLink("Back to List", "Index", null, new { Class = "btn" })
+        </div>
+    }
+
+    @Html.ValidationSummary()
+</div><!-- end of metro span12-->

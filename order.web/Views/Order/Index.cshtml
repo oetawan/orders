@@ -1,0 +1,48 @@
+﻿@model IList<porder.model.Grouping>
+@{
+    Layout = "~/Views/Shared/_LayoutApp.cshtml";
+}
+
+@section navbar
+{
+    <div class="navbar">
+        <div class="navbar-inner">
+            <div class="container">
+                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
+                <a class="brand" href="#"><span aria-hidden="true" data-icon="<"></span> Order</a>
+                <div class="nav-collapse collapse pull-right">
+                    <ul class="nav">
+                        <li class="divider-vertical"></li>
+                        <!--<li><a href="/Branch/NewBranch"><i aria-hidden="true" data-icon=""></i>  <strong>New Branch</strong></a></li>-->
+                    </ul>
+                </div>
+            </div><!-- end of container-->
+        </div><!-- end of navbar-inner-->
+    </div><!-- end of navbar-->
+}
+
+<div class="metro span2 well">
+    <ul class="nav nav-list">
+    @foreach (var item in Model) {
+        <li class="list-item"><a href="#">@item.Name - @item.Code</a></li>
+    }
+    </ul>
+</div><!-- end of .metro.span4-->
+<div class="metro span10 well">
+</div><!-- end of .metro.span8-->
+
+@section scripts
+{
+    <script type="text/javascript">
+        $(function () {
+            $('li.list-item').click(function (e) {
+                $('li.list-item.active').removeClass('active');
+                $(this).addClass('active');
+            });
+        });
+    </script>
+}

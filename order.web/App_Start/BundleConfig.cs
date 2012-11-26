@@ -35,6 +35,9 @@ namespace order.web
             bundles.Add(new ScriptBundle("~/bundles/jsapp").Include(
                 "~/Scripts/app/home.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/jsregister").Include(
+                "~/Scripts/app/register.js"));
+
             /*bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
                         "~/Scripts/jquery-ui-{version}.js"));*/
 

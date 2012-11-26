@@ -10,6 +10,8 @@ namespace order.data.contract
     public interface IOrderUow
     {
         IRepository<Customer> Customers { get; }
+        IRepository<UserCustomerMapping> UserCustomerMapping { get; }
+        IRepository<Branch> Branches { get; }
         void Commit();
     }
 }

@@ -2,6 +2,15 @@
     position: relative;
 }
 
+.zain-content-wrapper {
+    margin: 0 auto;
+    width: 100%;
+}
+
+.zain-float-left {
+    float: left;
+}
+
 h1.top-header a:active, h1.top-header a, h2.top-header a:active, h2.top-header a
 {
     text-decoration: none;
@@ -83,4 +92,37 @@ li.active.zain-nav-button
     background-image: -o-linear-gradient(top, #2E63CC, #2E63CC);
     background-image: linear-gradient(to bottom, #2E63CC, #2E63CC);
     background-repeat: repeat-x;*/
+}
+
+div.zain-footer 
+{
+    margin: 20px auto;
+    border-top: 1px solid #EEE;
+    text-align: center;
+    padding: 10px;
+}
+
+.zain-main-content 
+{
+    margin-top: 20px;
+}
+
+.field-validation-error, .validation-summary-errors
+{
+    color: red;
+}
+
+.center-horizontal 
+{
+    margin: 0 auto;
+}
+
+div.loading-img
+{
+    display: inline-block;
+}
+
+div.loading-img img 
+{
+    margin-top: -12px;
 }

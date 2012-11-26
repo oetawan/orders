@@ -27,6 +27,11 @@ namespace order.data
             return DbSet;
         }
 
+        public virtual IEnumerable<T> Where(System.Linq.Expressions.Expression<Func<T, bool>> expression)
+        {
+            return DbSet.Where(expression);
+        }
+
         public virtual T GetById(int id)
         {
             return DbSet.Find(id);

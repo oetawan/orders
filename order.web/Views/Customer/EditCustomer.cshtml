@@ -1,0 +1,102 @@
+﻿@model order.model.Customer
+
+@{
+    ViewBag.Title = "Administrator Page";
+    Layout = "~/Views/Shared/_LayoutApp.cshtml";
+}
+
+@section navbar
+{
+    <div class="navbar">
+        <div class="navbar-inner">
+            <div class="container">
+                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
+                <a class="brand" href="#"><span aria-hidden="true" data-icon="&"></span> Edit Customer</a>
+                <div class="nav-collapse collapse pull-right">
+                    <ul class="nav">
+                        <li class="divider-vertical"></li>
+                        <li><a href="/Customer/Index"><i aria-hidden="true" data-icon="b"></i>  <strong>Customers</strong></a></li>
+                    </ul>
+                </div>
+            </div><!-- end of container-->
+        </div><!-- end of navbar-inner-->
+    </div><!-- end of navbar-->
+}
+
+<div class="metro span12 well">
+@using (Html.BeginForm())
+{
+    
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.Id)
+
+    <div class="control-group">
+        @Html.LabelFor(model => model.LicenseId)
+        <div class="controls">
+            @Html.EditorFor(model => model.LicenseId)
+            @Html.ValidationMessageFor(model => model.LicenseId)
+        </div>
+    </div>
+    
+    <div class="control-group">
+        @Html.LabelFor(model => model.CustomerCode)
+        <div class="controls">
+            @Html.EditorFor(model => model.CustomerCode)
+            @Html.ValidationMessageFor(model => model.CustomerCode)
+        </div>
+    </div>
+    
+    <div class="control-group">
+        @Html.LabelFor(model => model.CustomerName)
+        <div class="controls">
+            @Html.EditorFor(model => model.CustomerName)
+            @Html.ValidationMessageFor(model => model.CustomerName)
+        </div>
+    </div>
+    
+     <div class="control-group">
+        @Html.LabelFor(model => model.ServiceBusNamespace)
+        <div class="controls">
+            @Html.EditorFor(model => model.ServiceBusNamespace)
+            @Html.ValidationMessageFor(model => model.ServiceBusNamespace)
+        </div>
+    </div>
+    
+    <div class="control-group">
+        @Html.LabelFor(model => model.Issuer)
+        <div class="controls">
+            @Html.EditorFor(model => model.Issuer)
+            @Html.ValidationMessageFor(model => model.Issuer)
+        </div>
+    </div>
+    
+    <div class="control-group">
+        @Html.LabelFor(model => model.SecretKey)
+        <div class="controls">
+            @Html.EditorFor(model => model.SecretKey)
+            @Html.ValidationMessageFor(model => model.SecretKey)
+        </div>
+    </div>
+
+    <div class="form-actions">
+        <button type="submit" class="btn btn-primary">Save</button>
+        <a href="/Customer/Index" class="btn">Back to list</a>
+    </div>
+    
+    @Html.ValidationSummary(true)
+}
+</div><!-- end of metro span12-->
+@section scripts
+{
+    <script type="text/javascript">
+        $("input[name='LicenseId']").addClass('span4');
+        $("input[name='CustomerCode']").addClass('span2');
+        $("input[name='CustomerName']").addClass('span4');
+        $("input[name='SecretKey']").addClass('span4');
+        $(".zain-footer").css('margin-top', "0");
+    </script>
+}

@@ -1,0 +1,51 @@
+﻿@model order.web.Models.SubmitLicenseIdViewModel
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_LayoutApp.cshtml";
+}
+
+@section navbar
+{
+    <div class="navbar">
+        <div class="navbar-inner">
+            <div class="container">
+                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
+                <a class="brand" href="#"><span aria-hidden="true" data-icon=""></span> Register</a>
+                <div class="nav-collapse collapse pull-right">
+                    <ul class="nav">
+                        <li class="divider-vertical"></li>
+                        <li><a href="/Home/Index"><i aria-hidden="true" class="icon-key"></i> <strong>Login</strong></a></li>
+                    </ul>
+                </div>
+            </div><!-- end of container-->
+        </div><!-- end of navbar-inner-->
+    </div><!-- end of navbar-->
+}
+
+<div class="metro span12 well">
+@using (Html.BeginForm()) {
+        <div class="control-group">
+            @Html.LabelFor(model => model.LicenseId)
+            <div class="controls">
+                @Html.EditorFor(model => model.LicenseId)
+                @Html.ValidationMessageFor(model => model.LicenseId)
+            </div>
+        </div>
+    
+        <div class="form-actions center-horizontal">
+            <button type="submit" class="btn btn-primary submit">Submit</button>
+            <a href="/Home/Index" class="btn"><i aria-hidden="true" class="icon-key"></i> Login</a>
+        </div>
+    
+    @Html.ValidationSummary()
+}
+</div><!-- end of .metro.span12-->
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jsregister")
+}

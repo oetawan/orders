@@ -27,9 +27,13 @@ namespace order.data
         private void CreateRepositories()
         {
             this.Customers = new EFRepository<Customer>(this.DbContext);
+            this.UserCustomerMapping = new EFRepository<UserCustomerMapping>(this.DbContext);
+            this.Branches = new EFRepository<Branch>(this.DbContext);
         }
 
         public IRepository<Customer> Customers { get; private set; }
+        public IRepository<UserCustomerMapping> UserCustomerMapping { get; private set; }
+        public IRepository<Branch> Branches { get; private set; }
 
         public void Commit()
         {

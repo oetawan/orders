@@ -1,0 +1,54 @@
+﻿@model IEnumerable<order.model.Branch>
+@{
+    Layout = "~/Views/Shared/_LayoutApp.cshtml";
+}
+
+@section navbar
+{
+    <div class="navbar">
+        <div class="navbar-inner">
+            <div class="container">
+                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
+                <a class="brand" href="#"><span aria-hidden="true" data-icon=""></span> Manage Branch</a>
+                <div class="nav-collapse collapse pull-right">
+                    <ul class="nav">
+                        <li class="divider-vertical"></li>
+                        <li><a href="/Branch/NewBranch"><i aria-hidden="true" data-icon=""></i>  <strong>New Branch</strong></a></li>
+                    </ul>
+                </div>
+            </div><!-- end of container-->
+        </div><!-- end of navbar-inner-->
+    </div><!-- end of navbar-->
+}
+
+<div class="metro span12 well">
+    <div class="listview-container grid-layout zain-listview-container">
+    @foreach (var item in Model) {
+       <div class="mediumListIconTextItem zain-listviewitem">
+          <div class="mediumListIconTextItem-Detail">
+            <h3 class="zain-heading" aria-hidden="true" data-icon=""> @Html.DisplayFor(modelItem => item.BranchName) - @Html.DisplayFor(modelItem => item.BranchCode)</h3>
+            <span class="label label-info">@Html.DisplayFor(modelItem => item.Username)</span>
+            <div class="zain-action-group">
+                @Html.ActionLink("Edit", "EditBranch", new { Id = item.Id }, new { id = "btn-edit-customer", Class = "btn btn-primary" })
+                @Html.ActionLink("Delete", "DeleteBranch", new { Id = item.Id }, new { id = "btn-delete-customer", Class = "btn btn-warning" })
+            </div>
+          </div>
+       </div>
+       <hr />
+    }
+    </div><!-- end of listview-container-->
+</div><!-- end of .metro.span12-->
+
+@section scripts
+{
+    <script type="text/javascript">
+        $(function () {
+            $('form#logoutForm').css('display', 'inline-block');
+            $('li#logout-menu').css('height', '10px');
+        });
+    </script>
+}

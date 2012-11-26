@@ -1,38 +1,30 @@
 ﻿using order.data.contract;
+using order.model;
+using order.web.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace order.web.Controllers
 {
     [Authorize]
     public class HomeController : Controller
     {
-        private order.data.contract.IOrderUow Uow { get; set; }
-        public HomeController(IOrderUow uow)
-        {
-            Uow = uow;
-        }
         public ActionResult Index()
         {
-            ViewBag.Message = "Customers";
+            string[] roles = Roles.GetRolesForUser(this.User.Identity.Name);
 
-            return View(Uow.Customers.GetAll());
-        }
-
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your app description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
+            if (roles.Contains(RoleNames.ADMINISTRATOR))
+                return RedirectToAction("Index", "Customer");
+            else if (roles.Contains(RoleNames.CUSTOMER))
+                return RedirectToAction("Index", "Branch");
+            else if (roles.Contains(RoleNames.BRANCH))
+                return RedirectToAction("Index", "Order");
+            
             return View();
         }
     }
