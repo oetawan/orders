@@ -25,14 +25,32 @@ namespace order.web.Controllers
         public ActionResult Index()
         {
             ViewBag.Title = OrderSession.Branch.BranchName;
+            
+            return View();
+        }
 
+        [HttpGet]
+        public JsonResult Groups()
+        {
             IList<Grouping> groups = new List<Grouping>();
             using (var ch = OrderSession.OrderServiceChannelFactory.CreateChannel())
             {
-                groups = groups = ch.AllGroups();
+                groups = ch.AllGroups();
+            }
+            
+            return Json(groups, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public JsonResult ItemsGroup(int groupId)
+        {
+            IList<Item> items = new List<Item>();
+            using (var ch = OrderSession.OrderServiceChannelFactory.CreateChannel())
+            {
+                items = ch.FindItemByGroup(groupId);
             }
 
-            return View(groups);
+            return Json(items, JsonRequestBehavior.AllowGet);
         }
 
         private OrderSession OrderSession

@@ -38,6 +38,10 @@ namespace order.web
             bundles.Add(new ScriptBundle("~/bundles/jsregister").Include(
                 "~/Scripts/app/register.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/jsorder").Include(
+                "~/Scripts/underscore.min.js",
+                "~/Scripts/backbone.min.js"));
+
             /*bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
                         "~/Scripts/jquery-ui-{version}.js"));*/
 
@@ -58,6 +62,9 @@ namespace order.web
                 "~/Content/bootmetro/css/icomoon.css",
                 "~/Content/bootmetro/css/datepicker.css",
                 "~/Content/bootmetro/css/daterangepicker.css"));
+            bundles.Add(new StyleBundle("~/Content/css/order").Include(
+                "~/Content/order.css", 
+                "~/Content/jquery.loadmask.css"));
 
             /*bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/site.css"));
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(

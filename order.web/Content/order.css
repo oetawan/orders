@@ -1,0 +1,22 @@
+﻿ul.nav.nav-tabs.nav-stacked li.active 
+{
+    
+}
+div.order-error-container 
+{
+    position: relative;
+    margin: 0 auto;
+    width: 400px;
+    z-index: 999;
+    text-align: center;
+}
+
+hr.row-separator 
+{
+    margin: 0;
+}
+div.noitemfound 
+{
+    text-align: center;
+    padding: 60px;
+}
