@@ -24,8 +24,8 @@ namespace order.web.Controllers
                 return RedirectToAction("Index", "Branch");
             else if (roles.Contains(RoleNames.BRANCH))
                 return RedirectToAction("Index", "Order");
-            
-            return View();
+
+            return RedirectToAction("Login", "Account");
         }
     }
 }

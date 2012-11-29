@@ -8,6 +8,7 @@
         define('jquery', [], function () { return jQuery; });
         define('underscore', [], function () { return _; });
         define('backbone', [], function () { return Backbone; });
+        define('bootbox', [], function () { return bootbox; });
     }
 
     function loadPluginsAndBoot() {

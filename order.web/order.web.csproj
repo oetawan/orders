@@ -430,6 +430,7 @@
     <Content Include="Scripts\app\home.js" />
     <Content Include="Scripts\app\order\controller\orderController.js" />
     <Content Include="Scripts\app\order\main.js" />
+    <Content Include="Scripts\app\order\model\SearchItemList.js" />
     <Content Include="Scripts\app\order\model\ItemList.js" />
     <Content Include="Scripts\app\order\model\GroupList.js" />
     <Content Include="Scripts\app\order\model\Group.js" />
@@ -443,6 +444,8 @@
     <Content Include="Scripts\app\register.js" />
     <Content Include="Scripts\backbone.js" />
     <Content Include="Scripts\backbone.min.js" />
+    <Content Include="Scripts\bootbox.js" />
+    <Content Include="Scripts\bootbox.min.js" />
     <Content Include="Scripts\bootmetro-charms.js" />
     <Content Include="Scripts\bootmetro.js" />
     <Content Include="Scripts\bootstrap-datepicker.js" />

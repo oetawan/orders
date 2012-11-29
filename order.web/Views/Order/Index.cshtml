@@ -21,17 +21,20 @@
                 <div class="nav-collapse collapse pull-right">
                     <ul class="nav">
                         <li class="divider-vertical"></li>
-                        <!--<li><a href="/Branch/NewBranch"><i aria-hidden="true" data-icon=""></i>  <strong>New Branch</strong></a></li>-->
+                        <li><a id="back-to-listitem-menu" href="#" aria-hidden="true" data-icon=""> Back to list item</a></li>
                     </ul>
+                    <form class="navbar-search pull-left" id="search-item-form" >
+                        <input type="text" class="search-query" placeholder="Search">
+                    </form> 
                 </div>
             </div><!-- end of container-->
         </div><!-- end of navbar-inner-->
     </div><!-- end of navbar-->
 }
-<div class="metro span2"></div>
-<div class="metro span10"></div>
-<div class="order-error-container">
-</div>
+<div class="metro span2 group-view"></div>
+<div class="metro span10 item-view"></div>
+<div class="metro span12 search-item-view"></div>
+<div class="order-error-container"></div>
 @section scripts
 {
     <script type="text/javascript" src="@Url.Content("~/Scripts/underscore.min.js")"></script>

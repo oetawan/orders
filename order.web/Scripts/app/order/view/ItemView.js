@@ -1,7 +1,7 @@
 ﻿/// <reference path="../../../backbone.js" />
 /// <reference path="../../../underscore.js" />
 
-define(['jquery', 'underscore', 'backbone','app/eventAggregator'], function ($, _, Backbone, EA) {
+define(['jquery', 'underscore', 'backbone', 'bootbox','app/eventAggregator'], function ($, _, Backbone, bootbox, EA) {
     return Backbone.View.extend({
         className: 'mediumListIconTextItem zain-listviewitem',
         template: _.template('<div class="mediumListIconTextItem-Detail">\
@@ -9,21 +9,26 @@ define(['jquery', 'underscore', 'backbone','app/eventAggregator'], function ($, 
             <span class="label label-info"><%= CurrencyId %> <%= Price %></span>\
             <span>/</span>\
             <span class="label label-info"><%= UnitCode %></span>\
-            <div class="control-group">\
+            <div class="control-group inputqty-container">\
                 <label class="control-label" for="inputQty">Qty</label>\
                 <div class="controls">\
-                    <input type="text" id="inputQty" value="1">\
+                    <input type="number" id="inputQty" value="1">\
                 </div>\
             </div>\
             <div class="zain-action-group">\
-                <button class="btn btn-primary">Add to order</button>\
+                <button class="btn btn-primary add-to-order">Add to order</button>\
             </div>\
           </div>'),
         events: {
+            'click button.add-to-order': 'addToOrder'
         },
         render: function () {
             this.$el.html(this.template(this.model.toJSON()));
             return this;
+        },
+        addToOrder: function () {
+            this.model.set('qty', parseInt($('#inputQty', this.$el).val()));
+            EA.trigger('order:additem', this.model);
         }
     });
 });

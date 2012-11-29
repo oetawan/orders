@@ -52,6 +52,18 @@ namespace order.web.Controllers
 
             return Json(items, JsonRequestBehavior.AllowGet);
         }
+        
+        [HttpGet]
+        public JsonResult SearchItem(string searchQuery)
+        {
+            IList<Item> items = new List<Item>();
+            using (var ch = OrderSession.OrderServiceChannelFactory.CreateChannel())
+            {
+                items = ch.SearchItem(searchQuery);
+            }
+
+            return Json(items, JsonRequestBehavior.AllowGet);
+        }
 
         private OrderSession OrderSession
         {

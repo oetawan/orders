@@ -17,7 +17,7 @@ define(['jquery', 'underscore', 'backbone', 'app/order/view/ItemView', 'app/even
                 this.addItem(item);
             }, this);
             if (this.collection.length === 0) {
-                this.$el.append('<div class="noitemfound"><h3>No item found</h3></div>');
+                this.$el.html('<div class="noitemfound"><h3>No item found</h3></div>');
             }
         },
         addItem: function (item) {

@@ -28,6 +28,7 @@ namespace order.web
                 "~/Scripts/bootstrap-datepicker.js",
                 "~/Scripts/bootmetro.js",
                 "~/Scripts/bootmetro-charms.js",
+                "~/Scripts/bootbox.js",
                 "~/Scripts/daterangepicker.js",
                 "~/Scripts/holder.js",
                 "~/Scripts/mustache.js"));

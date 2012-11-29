@@ -18,5 +18,20 @@ hr.row-separator
 div.noitemfound 
 {
     text-align: center;
-    padding: 60px;
+    padding: 40px;
+}
+div.inputqty-container
+{
+    margin-top: 10px;
+}
+
+div.inputqty-container .inputQty
+{
+    margin-top: 10px;
+}
+
+input[type=number] 
+{
+    text-align: right;
+    width: 118px;
 }
