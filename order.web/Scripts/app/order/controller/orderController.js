@@ -9,16 +9,18 @@
         'app/order/model/SearchItemList',
         'app/order/view/ItemListView',
         'bootbox',
-        'app/eventAggregator'], function ($, _, Backbone, GroupList, GroupListView, ErrorView, ProgressWinRing, ItemList, SearchItemList, ItemListView, bootbox, EA) {
+        'app/order/model/ShoppingCart',
+        'app/eventAggregator'], function ($, _, Backbone, GroupList, GroupListView, ErrorView, ProgressWinRing, ItemList, SearchItemList, ItemListView, bootbox, ShoppingCart, EA) {
 
     return function() {
+        var shoppingCart = new ShoppingCart();
         var progressWinRing = new ProgressWinRing();
         var groupList = new GroupList();
         var itemList = new ItemList();
         var searchItemList = new SearchItemList();
         var groupListView = new GroupListView({ collection: groupList });
-        var itemListView = new ItemListView({ collection: itemList });
-        var searchItemListView = new ItemListView({ collection: searchItemList });
+        var itemListView = new ItemListView({ collection: itemList, 'shoppingCart': shoppingCart });
+        var searchItemListView = new ItemListView({ collection: searchItemList, 'shoppingCart': shoppingCart });
         var showError = function (err) {
             var errView = new ErrorView({ model: err });
             $('div.order-error-container').html(errView.render().el);
@@ -41,6 +43,7 @@
                     showError(new Backbone.Model({errorMessage: xhr.statusText + " (" + xhr.status + ")"}));
                 }
             });
+            shoppingCart.fetch();
         };
         var showItems = function (item) {
             itemList.fetch({
@@ -83,6 +86,12 @@
             });
         }
 
+        shoppingCart.on('change', function (sc) {
+            $('span#order-amount').html(sc.get('TotalAmountfterDiscount'))
+            $('span#order-amount').formatCurrency({ colorize: true, region: 'id-ID' });
+            $('span#order-amount').before('<span> </span>');
+        }, this);
+
         EA.on('group:selected', function (data) {
             showItems(data.model);
         }, this);
@@ -103,8 +112,8 @@
             $('div.item-view').show();
         });
 
-        EA.on('order:additem', function (item) {
-            console.log(item.toJSON());
+        EA.on('order:addtoordersuccess', function () {
+            shoppingCart.fetch();
         });
 
         return {

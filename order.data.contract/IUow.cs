@@ -1,4 +1,5 @@
 ﻿using order.model;
+using order.snapshot;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,7 @@ namespace order.data.contract
         IRepository<Customer> Customers { get; }
         IRepository<UserCustomerMapping> UserCustomerMapping { get; }
         IRepository<Branch> Branches { get; }
+        IShoppingCartRepository ShoppingCarts { get; }
         void Commit();
     }
 }

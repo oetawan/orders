@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IRepository.cs" />
+    <Compile Include="IShoppingCartRepository.cs" />
     <Compile Include="IUow.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -47,6 +48,10 @@
     <ProjectReference Include="..\order.model\order.model.csproj">
       <Project>{631c2cb5-d785-4fb5-84ec-4d7826b89baa}</Project>
       <Name>order.model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\order.snapshot\order.snapshot.csproj">
+      <Project>{5b8d4b78-1d71-492d-bca9-d272588d522e}</Project>
+      <Name>order.snapshot</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,6 +1,6 @@
-namespace order.data.Migrations
+/*namespace order.data.Migrations
 {
-    /*using order.model;
+    using order.model;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
@@ -35,5 +35,5 @@ namespace order.data.Migrations
             //    );
             //
         }
-    }*/
-}
+    }
+}*/

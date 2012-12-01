@@ -21,7 +21,7 @@ define(['jquery', 'underscore', 'backbone', 'app/order/view/ItemView', 'app/even
             }
         },
         addItem: function (item) {
-            var view = new ItemView({ model: item });
+            var view = new ItemView({ model: item, 'shoppingCart': this.options.shoppingCart });
             view.render();
             this.$el.append(view.el);
             this.$el.append('<hr class="row-separator"/>');

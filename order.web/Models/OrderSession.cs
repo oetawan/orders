@@ -1,6 +1,7 @@
 ﻿using Microsoft.ServiceBus;
 using order.data.contract;
 using order.model;
+using porder.model;
 using porder.service.contract;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,7 @@ namespace order.web.Models
     {
         const string BRANCH = "Branch";
         const string CUSTOMER = "Customer";
+        const string VENDOR = "Vendor";
         const string ORDER_SERVICE_CHANNEL_FACTORY = "OrderServiceChannelFactory";
 
         public Branch Branch { 
@@ -35,6 +37,22 @@ namespace order.web.Models
                 }
 
                 return (Customer)httpSession[CUSTOMER];
+            }
+        }
+
+        public Vendor Vendor
+        {
+            get
+            {
+                if (httpSession[VENDOR] == null)
+                {
+                    using(var ch = OrderServiceChannelFactory.CreateChannel())
+                    {
+                        httpSession[VENDOR] = ch.FindVendorByCode(Customer.CustomerCode);
+                    }
+                }
+
+                return (Vendor)httpSession[VENDOR];
             }
         }
 

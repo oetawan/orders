@@ -10,6 +10,7 @@ using porder.service.contract;
 using porder.model;
 using Microsoft.ServiceBus;
 using order.web.Models;
+using order.snapshot;
 namespace order.web.Controllers
 {
     public class OrderController : Controller
@@ -25,6 +26,7 @@ namespace order.web.Controllers
         public ActionResult Index()
         {
             ViewBag.Title = OrderSession.Branch.BranchName;
+            ViewBag.VendorName = OrderSession.Vendor.Name;
             
             return View();
         }
@@ -63,6 +65,40 @@ namespace order.web.Controllers
             }
 
             return Json(items, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public JsonResult ShoppingCart()
+        {
+            ShoppingCart sc = orderUow.ShoppingCarts.Get(this.User.Identity.Name);
+            return Json(sc.CreateSnapshot(), JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public JsonResult AddItemToOrder(ShoppingCart.AddItemCommand cmd)
+        {
+            return CatchPosibleExeption(() =>
+            {
+                ShoppingCart sc = orderUow.ShoppingCarts.Get(this.User.Identity.Name);
+                sc.AddItem(cmd);
+
+                orderUow.ShoppingCarts.Save(sc);
+                orderUow.Commit();
+
+                return Json(new { success = true });
+            });
+        }
+
+        private JsonResult CatchPosibleExeption(Func<JsonResult> action)
+        {
+            try
+            {
+                return action();
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, errorMessage = ex.GetInnerMostException().Message });
+            }
         }
 
         private OrderSession OrderSession

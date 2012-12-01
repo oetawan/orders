@@ -27,18 +27,22 @@
 
 <div class="metro span12 well">
     <div class="listview-container grid-layout zain-listview-container">
-    @foreach (var item in Model) {
-       <div class="mediumListIconTextItem zain-listviewitem">
-          <div class="mediumListIconTextItem-Detail">
-            <h3 class="zain-heading" aria-hidden="true" data-icon=""> @Html.DisplayFor(modelItem => item.BranchName) - @Html.DisplayFor(modelItem => item.BranchCode)</h3>
-            <span class="label label-info">@Html.DisplayFor(modelItem => item.Username)</span>
-            <div class="zain-action-group">
-                @Html.ActionLink("Edit", "EditBranch", new { Id = item.Id }, new { id = "btn-edit-customer", Class = "btn btn-primary" })
-                @Html.ActionLink("Delete", "DeleteBranch", new { Id = item.Id }, new { id = "btn-delete-customer", Class = "btn btn-warning" })
-            </div>
-          </div>
-       </div>
-       <hr />
+    @if(Model.Count()>0){
+        foreach (var item in Model) {
+           <div class="mediumListIconTextItem zain-listviewitem">
+              <div class="mediumListIconTextItem-Detail">
+                <h3 class="zain-heading" aria-hidden="true" data-icon=""> @Html.DisplayFor(modelItem => item.BranchName) - @Html.DisplayFor(modelItem => item.BranchCode)</h3>
+                <span class="label label-info">@Html.DisplayFor(modelItem => item.Username)</span>
+                <div class="zain-action-group">
+                    @Html.ActionLink("Edit", "EditBranch", new { Id = item.Id }, new { id = "btn-edit-customer", Class = "btn btn-primary" })
+                    @Html.ActionLink("Delete", "DeleteBranch", new { Id = item.Id }, new { id = "btn-delete-customer", Class = "btn btn-warning" })
+                </div>
+              </div>
+           </div>
+           <hr />
+        }
+    } else {
+        <h3 class="nobranchfound">No branch found</h3>
     }
     </div><!-- end of listview-container-->
 </div><!-- end of .metro.span12-->
@@ -49,6 +53,8 @@
         $(function () {
             $('form#logoutForm').css('display', 'inline-block');
             $('li#logout-menu').css('height', '10px');
+            $('h3.nobranchfound').css({ padding: '40px' });
+            $('h3.nobranchfound').parent().css('text-align', 'center');
         });
     </script>
 }

@@ -1,5 +1,6 @@
 ﻿using order.data.contract;
 using order.model;
+using order.snapshot;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,11 +30,13 @@ namespace order.data
             this.Customers = new EFRepository<Customer>(this.DbContext);
             this.UserCustomerMapping = new EFRepository<UserCustomerMapping>(this.DbContext);
             this.Branches = new EFRepository<Branch>(this.DbContext);
+            this.ShoppingCarts = new ShoppingCartRepository(this.DbContext);
         }
 
         public IRepository<Customer> Customers { get; private set; }
         public IRepository<UserCustomerMapping> UserCustomerMapping { get; private set; }
         public IRepository<Branch> Branches { get; private set; }
+        public IShoppingCartRepository ShoppingCarts { get; set; }
 
         public void Commit()
         {

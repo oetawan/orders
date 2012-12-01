@@ -1,5 +1,6 @@
 ﻿using order.data.Migrations;
 using order.model;
+using order.snapshot;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -19,6 +20,7 @@ namespace order.data
         public DbSet<Customer> Customers { get; set; }
         public DbSet<UserCustomerMapping> UserCustomerMapping { get; set; }
         public DbSet<Branch> Branches { get; set; }
+        public DbSet<ShoppingCartStore> ShoppingCarts { get; set; }
         
         static OrderDbContext()
         {

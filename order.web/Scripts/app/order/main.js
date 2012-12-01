@@ -13,7 +13,9 @@
 
     function loadPluginsAndBoot() {
         requirejs(['/Scripts/jquery.loadmask.min.js',
-                   '/Scripts/moment.min.js'], boot);
+                   '/Scripts/moment.min.js',
+                   '/Scripts/jquery.formatCurrency-1.4.0.min.js',
+                   '/Scripts/i18n/jquery.formatCurrency.all.js'], boot);
     }
 
     function boot() {

@@ -20,18 +20,24 @@ div.noitemfound
     text-align: center;
     padding: 40px;
 }
-div.inputqty-container
+div.input-container
 {
     margin-top: 10px;
+    margin-bottom: 0;
 }
 
-div.inputqty-container .inputQty
+input#inputPrice, input#inputAmount
 {
-    margin-top: 10px;
+    text-align: right;
+    width: 118px;
 }
 
 input[type=number] 
 {
     text-align: right;
     width: 118px;
+}
+div.control-group.input-container 
+{
+    display: inline-block;
 }
