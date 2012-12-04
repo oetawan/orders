@@ -10,7 +10,8 @@
         'app/order/view/ItemListView',
         'bootbox',
         'app/order/model/ShoppingCart',
-        'app/eventAggregator'], function ($, _, Backbone, GroupList, GroupListView, ErrorView, ProgressWinRing, ItemList, SearchItemList, ItemListView, bootbox, ShoppingCart, EA) {
+        'app/order/view/ShoppingCartView',
+        'app/eventAggregator'], function ($, _, Backbone, GroupList, GroupListView, ErrorView, ProgressWinRing, ItemList, SearchItemList, ItemListView, bootbox, ShoppingCart, ShoppingCartView, EA) {
 
     return function() {
         var shoppingCart = new ShoppingCart();
@@ -25,11 +26,14 @@
             var errView = new ErrorView({ model: err });
             $('div.order-error-container').html(errView.render().el);
         };
+
         var show = function () {
             $('a#back-to-listitem-menu').hide();
             $('div.search-item-view').hide();
+            $('div.checkout-view').hide();
             $('div.search-item-view').html(searchItemListView.render().el);
-            $('.metro.span12.search-item-view').css('margin-left', '0');
+            $('.metro.span12.search-item-view').css('margin-left', '0'); 
+            $('div.checkout-view').css('margin-left', '0');
             $('div.group-view').html(groupListView.render().el);
             $('div.item-view').html(itemListView.render().el);
             groupList.fetch({
@@ -45,6 +49,7 @@
             });
             shoppingCart.fetch();
         };
+
         var showItems = function (item) {
             itemList.fetch({
                 data: {
@@ -71,6 +76,7 @@
                     $('div.noitemfound').html('<i><h3>Searching...</h3></i>');
                     $('div.group-view').hide();
                     $('div.item-view').hide();
+                    $('div.checkout-view').hide();
                     $('div.search-item-view').mask('Loading...');
                 },
                 complete: function () {
@@ -80,10 +86,20 @@
                 success: function (data) {
                     // add some code here when success
                 },
-                error: function (model,xhr) {
+                error: function (model, xhr) {
                     bootbox.modal(xhr.responseText, xhr.statusText);
                 }
             });
+        }
+
+        var showShoppingCart = function (e) {
+            $('a#back-to-listitem-menu').show();
+            $('div.search-item-view').hide();
+            $('div.group-view').hide();
+            $('div.item-view').hide();
+            $('div.checkout-view').show();
+            $('button.checkout-command').removeClass('hidden');
+            $('div.checkout-view-table').html(new ShoppingCartView({ model: shoppingCart }).render().el);
         }
 
         shoppingCart.on('change', function (sc) {
@@ -108,11 +124,18 @@
             e.preventDefault();
             $('a#back-to-listitem-menu').hide();
             $('div.search-item-view').hide();
+            $('div.checkout-view').hide();
             $('div.group-view').show();
             $('div.item-view').show();
         });
 
+        $('a.brand').click(showShoppingCart);
+
         EA.on('order:addtoordersuccess', function () {
+            shoppingCart.fetch();
+        });
+
+        EA.on('order:removeorderitemsuccess', function () {
             shoppingCart.fetch();
         });
 

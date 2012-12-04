@@ -41,7 +41,9 @@ namespace order.web
 
             bundles.Add(new ScriptBundle("~/bundles/jsorder").Include(
                 "~/Scripts/underscore.min.js",
-                "~/Scripts/backbone.min.js"));
+                "~/Scripts/backbone.min.js",
+                "~/Scripts/jquery.formatCurrency-1.4.0.min.js",
+                "~/Scripts/i18n/jquery.formatCurrency.all.js"));
 
             /*bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
                         "~/Scripts/jquery-ui-{version}.js"));*/

@@ -39,6 +39,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DomainEvents.StructureMap">
+      <HintPath>..\packages\DomainEvents.StructureMap.1.0.1.7\lib\net40\DomainEvents.StructureMap.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Practices.ServiceLocation">
       <HintPath>..\packages\CommonServiceLocator.1.0\lib\NET35\Microsoft.Practices.ServiceLocation.dll</HintPath>
@@ -431,18 +434,21 @@
     <Content Include="Scripts\app\order\controller\orderController.js" />
     <Content Include="Scripts\app\order\main.js" />
     <Content Include="Scripts\app\order\model\AddToOrderCommand.js" />
+    <Content Include="Scripts\app\order\model\RemoveOrderItemCommand.js" />
     <Content Include="Scripts\app\order\model\SearchItemList.js" />
     <Content Include="Scripts\app\order\model\ItemList.js" />
     <Content Include="Scripts\app\order\model\GroupList.js" />
     <Content Include="Scripts\app\order\model\Group.js" />
     <Content Include="Scripts\app\order\model\Item.js" />
     <Content Include="Scripts\app\order\model\ShoppingCart.js" />
+    <Content Include="Scripts\app\order\view\ShoppingCartItemView.js" />
     <Content Include="Scripts\app\order\view\ItemListView.js" />
     <Content Include="Scripts\app\order\view\ItemView.js" />
     <Content Include="Scripts\app\order\view\ErrorView.js" />
     <Content Include="Scripts\app\order\view\GroupListView.js" />
     <Content Include="Scripts\app\order\view\GroupView.js" />
     <Content Include="Scripts\app\order\view\ProgressWinRing.js" />
+    <Content Include="Scripts\app\order\view\ShoppingCartView.js" />
     <Content Include="Scripts\app\register.js" />
     <Content Include="Scripts\backbone.js" />
     <Content Include="Scripts\backbone.min.js" />
@@ -781,6 +787,10 @@
     </WebReferenceUrl>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DomainEvents\DomainEvents.csproj">
+      <Project>{61f5360e-dbad-48d7-ad76-cc661a121113}</Project>
+      <Name>DomainEvents</Name>
+    </ProjectReference>
     <ProjectReference Include="..\order.data.contract\order.data.contract.csproj">
       <Project>{9f6be4e8-8bfc-4271-aaa4-c396255a5d42}</Project>
       <Name>order.data.contract</Name>
@@ -792,6 +802,14 @@
     <ProjectReference Include="..\order.model\order.model.csproj">
       <Project>{631c2cb5-d785-4fb5-84ec-4d7826b89baa}</Project>
       <Name>order.model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\order.service.contract\order.service.contract.csproj">
+      <Project>{6ffbc1ce-cd59-4c96-ae73-315ab8ceb147}</Project>
+      <Name>order.service.contract</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\order.service\order.service.csproj">
+      <Project>{1ef0f292-a443-423f-a5d6-3ed31a9375a8}</Project>
+      <Name>order.service</Name>
     </ProjectReference>
     <ProjectReference Include="..\order.snapshot\order.snapshot.csproj">
       <Project>{5b8d4b78-1d71-492d-bca9-d272588d522e}</Project>

@@ -4,10 +4,16 @@
         defaults: {
             ItemId: 0,
             Qty: 0,
-            Price: 0
+            Price: 0,
+            ItemCode: '',
+            ItemName: '',
+            UnitCode: ''
         },
         execute: function () {
             this.save({}, {
+                cache: false,
+                beforeSend: this.get('beforeSend'),
+                complete: this.get('complete'),
                 success: function (model, response, options) {
                     if (response.success === true) {
                         EA.trigger('order:addtoordersuccess', response);

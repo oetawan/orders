@@ -37,6 +37,7 @@ namespace order.data
         public void Save(ShoppingCart sc)
         {
             ShoppingCartSnapshot snapshot = sc.CreateSnapshot();
+
             ShoppingCartStore store = scStoreRepo.Where(s => s.UserId == snapshot.UserId).FirstOrDefault();
             if (store == null)
             {

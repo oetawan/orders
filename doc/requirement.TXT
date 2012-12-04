@@ -1,0 +1,9 @@
+1. Change Password
+2. Login & Session Expired management
+3. VAlidasi qty order item ( min: 1 )
+4. Paging ( Show more ) di item list dan search item
+5. Untuk path servicebus namespace gunakan kode atau id customer, jadi 1 servicebus namespace bisa 
+   digunakan beberapa customer. contoh: 
+   service bus namespace: zainsb1,
+   path: order/customer1
+6. Installer clickone untuk app porder service

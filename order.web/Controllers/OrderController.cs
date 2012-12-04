@@ -11,6 +11,7 @@ using porder.model;
 using Microsoft.ServiceBus;
 using order.web.Models;
 using order.snapshot;
+using StructureMap;
 namespace order.web.Controllers
 {
     public class OrderController : Controller
@@ -79,12 +80,23 @@ namespace order.web.Controllers
         {
             return CatchPosibleExeption(() =>
             {
-                ShoppingCart sc = orderUow.ShoppingCarts.Get(this.User.Identity.Name);
-                sc.AddItem(cmd);
+                cmd.Username = this.User.Identity.Name;
+                order.service.contract.IOrderService orderService = ObjectFactory.GetInstance<order.service.contract.IOrderService>();
+                orderService.AddItemToOrder(cmd);
 
-                orderUow.ShoppingCarts.Save(sc);
-                orderUow.Commit();
+                return Json(new { success = true });
+            });
+        }
 
+        [HttpPost]
+        public JsonResult RemoveItem(ShoppingCart.RemoveItemCommand cmd)
+        {
+            return CatchPosibleExeption(() =>
+            {
+                cmd.Username = this.User.Identity.Name;
+                order.service.contract.IOrderService orderService = ObjectFactory.GetInstance<order.service.contract.IOrderService>();
+                orderService.RemoveItem(cmd);
+                
                 return Json(new { success = true });
             });
         }

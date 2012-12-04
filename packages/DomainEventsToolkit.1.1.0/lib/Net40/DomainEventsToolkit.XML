@@ -1,0 +1,94 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>DomainEventsToolkit</name>
+    </assembly>
+    <members>
+        <member name="T:DomainEvents.DomainEventBase`1">
+            <summary>
+            Base class for a domain event
+            </summary>
+            <typeparam name="T">event data type</typeparam>
+        </member>
+        <member name="T:DomainEvents.IDomainEvent">
+            <summary>
+            Marker interface. All domain events must implement it
+            </summary>
+        </member>
+        <member name="T:DomainEvents.BuiltIns.LoggableDomainEvent`1">
+            <summary>
+            Base class for domain events implementing ILoggableDomainEvent
+            </summary>
+            <typeparam name="T">Event Data Type</typeparam>
+        </member>
+        <member name="T:DomainEvents.Managers.ApplicationDomainEventsManager">
+            <summary>
+            Thread safe
+            </summary>
+        </member>
+        <member name="T:DomainEvents.Managers.LocalDomainEventsManager">
+            <summary>
+            Not thread safe. Designed for use in a web context as the domain events manager for a single http request.
+            </summary>
+        </member>
+        <member name="M:DomainEvents.IPublishDomainEvent.Publish``1(``0)">
+            <summary>
+            Publish domain event 
+            </summary>
+            <typeparam name="TEvent">Domain Event</typeparam>
+            <param name="evnt">Instance of domain event</param>
+        </member>
+        <member name="M:DomainEvents.IDomainEventsManager.RegisterHandler``1(System.Action{``0})">
+            <summary>
+            Register handler for a domain event
+            </summary>
+            <typeparam name="TEvent">Event type</typeparam>
+            <param name="handler"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DomainEvents.IDomainEventsManager.RegisterHandler``1(DomainEvents.IHandleDomainEvent{``0})">
+            <summary>
+            Register handler for a domain event
+            </summary>
+            <typeparam name="TEvent">Event type</typeparam>
+            <param name="handler"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DomainEvents.IDomainEventsManager.RegisterHandler(DomainEvents.IHandleDomainEvent)">
+            <summary>
+            Register a handler for any domain event
+            </summary>
+            <param name="handler"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DomainEvents.IDomainEventsManager.BeginBuffering">
+            <summary>
+            Events are captured and not published until buffering ends
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DomainEvents.IDomainEventsManager.EndBuffering">
+            <summary>
+            Flushes the buffer. All captured events are raised.
+            </summary>
+        </member>
+        <member name="M:DomainEvents.IApplicationDomainEventsManager.SpawnLocal">
+            <summary>
+            Creates a local, not thread-safe domain events manager. 
+            Designed for web usage as the domain events manager for a single http request.
+            Every event published by the local manager will be also published by the application manager
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:DomainEvents.DomainEventHandlerBase`1">
+            <summary>
+            Base class for a domain event handler
+            </summary>
+        </member>
+        <member name="T:DomainEvents.IHandleDomainEvent`1">
+            <summary>
+            Marker interface
+            </summary>
+        </member>
+    </members>
+</doc>

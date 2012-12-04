@@ -18,6 +18,8 @@
 
 using order.data;
 using order.data.contract;
+using order.service;
+using order.service.contract;
 using StructureMap;
 namespace order.web.DependencyResolution {
     public static class IoC {
@@ -30,6 +32,7 @@ namespace order.web.DependencyResolution {
                                         scan.WithDefaultConventions();
                                     });
                             x.For<IOrderUow>().Use<OrderUow>();
+                            x.For<IOrderService>().Use<OrderService>();
                         });
             return ObjectFactory.Container;
         }

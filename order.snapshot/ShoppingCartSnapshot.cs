@@ -18,5 +18,9 @@ namespace order.snapshot
         public decimal Qty { get; set; }
         public decimal Price { get; set; }
         public decimal AmountAfterDiscount { get; set; }
+
+        public string ItemCode { get; set; }
+        public string ItemName { get; set; }
+        public string UnitCode { get; set; }
     }
 }

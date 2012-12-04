@@ -58,13 +58,22 @@ namespace order.model
             return new ShoppingCart(userId);
         }
 
-        public void AddItem(AddItemCommand param)
+        public void AddItem(AddItemCommand cmd)
         {
-            ShoppingCartItem existingItem = items.Where(item => item.CreateSnapshot().ItemId == param.ItemId).FirstOrDefault();
+            ShoppingCartItem existingItem = items.Where(item => item.CreateSnapshot().ItemId == cmd.ItemId).FirstOrDefault();
             if (existingItem != null)
                 items.Remove(existingItem);
             
-            items.Add(ShoppingCartItem.Create(param.ItemId, param.Qty, param.Price));
+            items.Add(ShoppingCartItem.Create(cmd.ItemId, cmd.Qty, cmd.Price, cmd.ItemCode, cmd.ItemName, cmd.UnitCode));
+            this.totalAmountAfterDiscount = items.Sum(item => item.CreateSnapshot().AmountAfterDiscount);
+        }
+
+        public void RemoveItem(RemoveItemCommand cmd)
+        {
+            ShoppingCartItem existingItem = items.Where(item => item.CreateSnapshot().ItemId == cmd.ItemId).FirstOrDefault();
+            if (existingItem != null)
+                items.Remove(existingItem);
+
             this.totalAmountAfterDiscount = items.Sum(item => item.CreateSnapshot().AmountAfterDiscount);
         }
 
@@ -77,6 +86,17 @@ namespace order.model
             public int ItemId { get; set; }
             public decimal Qty { get; set; }
             public decimal Price { get; set; }
+            public string Username { get; set; }
+
+            public string ItemCode { get; set; }
+            public string ItemName { get; set; }
+            public string UnitCode { get; set; }
+        }
+
+        public class RemoveItemCommand
+        {
+            public int ItemId { get; set; }
+            public string Username { get; set; }
         }
 
         #endregion
@@ -90,19 +110,27 @@ namespace order.model
             private decimal price;
             private decimal amountAfterDiscount;
 
+            private string itemCode;
+            private string itemName;
+            private string unitCode;
+
             #region Behaviour
 
-            private ShoppingCartItem(int itemId, decimal qty, decimal price)
+            private ShoppingCartItem(int itemId, decimal qty, decimal price, string itemCode, string itemName, string unitCode)
             {
                 this.itemId = itemId;
                 this.qty = qty;
                 this.price = price;
                 this.amountAfterDiscount = qty * price;
+
+                this.itemCode = itemCode;
+                this.itemName = itemName;
+                this.unitCode = unitCode;
             }
 
-            public static ShoppingCartItem Create(int itemId, decimal qty, decimal price)
+            public static ShoppingCartItem Create(int itemId, decimal qty, decimal price, string itemCode, string itemName, string unitCode)
             {
-                return new ShoppingCartItem(itemId, qty, price);
+                return new ShoppingCartItem(itemId, qty, price, itemCode, itemName, unitCode);
             }
 
             #endregion
@@ -115,6 +143,10 @@ namespace order.model
                 this.qty = snapshot.Qty;
                 this.price = snapshot.Price;
                 this.amountAfterDiscount = snapshot.AmountAfterDiscount;
+
+                itemCode = snapshot.ItemCode;
+                itemName = snapshot.ItemName;
+                unitCode = snapshot.UnitCode;
             }
 
             public ShoppingCartItemSnapshot CreateSnapshot()
@@ -124,7 +156,11 @@ namespace order.model
                     ItemId = this.itemId,
                     Price = this.price,
                     Qty = this.qty,
-                    AmountAfterDiscount = this.amountAfterDiscount
+                    AmountAfterDiscount = this.amountAfterDiscount,
+                    
+                    ItemCode = this.itemCode,
+                    ItemName = this.itemName,
+                    UnitCode = this.unitCode
                 };
             }
 

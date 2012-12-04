@@ -55,6 +55,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DomainEvents\DomainEvents.csproj">
+      <Project>{61f5360e-dbad-48d7-ad76-cc661a121113}</Project>
+      <Name>DomainEvents</Name>
+    </ProjectReference>
     <ProjectReference Include="..\order.snapshot\order.snapshot.csproj">
       <Project>{5b8d4b78-1d71-492d-bca9-d272588d522e}</Project>
       <Name>order.snapshot</Name>

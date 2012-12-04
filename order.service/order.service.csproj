@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{1EF0F292-A443-423F-A5D6-3ED31A9375A8}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>order.service</RootNamespace>
+    <AssemblyName>order.service</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="OrderService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="CommandExecutor.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DomainEvents\DomainEvents.csproj">
+      <Project>{61f5360e-dbad-48d7-ad76-cc661a121113}</Project>
+      <Name>DomainEvents</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\order.data.contract\order.data.contract.csproj">
+      <Project>{9f6be4e8-8bfc-4271-aaa4-c396255a5d42}</Project>
+      <Name>order.data.contract</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\order.data\order.data.csproj">
+      <Project>{adb79070-7a26-4d56-9c5c-da708a6aba8b}</Project>
+      <Name>order.data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\order.model\order.model.csproj">
+      <Project>{631c2cb5-d785-4fb5-84ec-4d7826b89baa}</Project>
+      <Name>order.model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\order.service.contract\order.service.contract.csproj">
+      <Project>{6ffbc1ce-cd59-4c96-ae73-315ab8ceb147}</Project>
+      <Name>order.service.contract</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\order.snapshot\order.snapshot.csproj">
+      <Project>{5b8d4b78-1d71-492d-bca9-d272588d522e}</Project>
+      <Name>order.snapshot</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -61,6 +61,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DomainEvents\DomainEvents.csproj">
+      <Project>{61f5360e-dbad-48d7-ad76-cc661a121113}</Project>
+      <Name>DomainEvents</Name>
+    </ProjectReference>
     <ProjectReference Include="..\order.data.contract\order.data.contract.csproj">
       <Project>{9f6be4e8-8bfc-4271-aaa4-c396255a5d42}</Project>
       <Name>order.data.contract</Name>
