@@ -89,6 +89,19 @@ namespace order.web.Controllers
         }
 
         [HttpPost]
+        public JsonResult ChangeQty(ShoppingCart.ChangeQtyCommand cmd)
+        {
+            return CatchPosibleExeption(() =>
+            {
+                cmd.Username = this.User.Identity.Name;
+                order.service.contract.IOrderService orderService = ObjectFactory.GetInstance<order.service.contract.IOrderService>();
+                orderService.ChangeQty(cmd);
+
+                return Json(new { success = true });
+            });
+        }
+
+        [HttpPost]
         public JsonResult RemoveItem(ShoppingCart.RemoveItemCommand cmd)
         {
             return CatchPosibleExeption(() =>

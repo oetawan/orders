@@ -10,6 +10,7 @@ namespace order.service.contract
     public interface IOrderService
     {
         void AddItemToOrder(ShoppingCart.AddItemCommand cmd);
+        void ChangeQty(ShoppingCart.ChangeQtyCommand cmd);
         void RemoveItem(ShoppingCart.RemoveItemCommand cmd);
     }
 }

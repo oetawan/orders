@@ -25,6 +25,16 @@ namespace order.service
             });
         }
 
+        public void ChangeQty(ShoppingCart.ChangeQtyCommand cmd)
+        {
+            cmdExecutor.Execute(uow =>
+            {
+                ShoppingCart sc = uow.ShoppingCarts.Get(cmd.Username);
+                sc.ChangeQty(cmd);
+                uow.ShoppingCarts.Save(sc);
+            });
+        }
+
         public void RemoveItem(ShoppingCart.RemoveItemCommand cmd)
         {
             cmdExecutor.Execute(uow => {

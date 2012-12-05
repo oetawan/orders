@@ -22,21 +22,13 @@ function ($, _, Backbone, bootbox, EA, AddToOrderCommand, RemoveOrderItemCommand
             'click button.remove-item': 'removeItem'
         },
         initialize: function () {
-            this.options.shoppingCart.on('change', function () {
+            EA.on('shoppingcart:fetch-success', function () {
                 this.render();
             }, this);
         },
         render: function () {
             this.$el.html(this.template(this.model.toJSON()));
             this.renderOrderItem();
-            /*$('input#inputQty', this.$el).validate({
-                rules: {
-                    inputQty: {
-                        required: true,
-                        min: 1
-                    }
-                }
-            });*/
             return this;
         },
         renderOrderItem: function () {
@@ -71,7 +63,7 @@ function ($, _, Backbone, bootbox, EA, AddToOrderCommand, RemoveOrderItemCommand
                                         </div>\
                                        </div>\
                                        <div class="zain-action-group">\
-                                        <button class="btn btn-primary add-to-order">Add to order</button>\
+                                        <button class="btn btn-primary add-to-order">Add to cart</button>\
                                        </div>', orderItem);
             }
             $('div.mediumListIconTextItem-Detail', this.$el).append(html);

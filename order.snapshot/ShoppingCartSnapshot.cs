@@ -8,7 +8,7 @@ namespace order.snapshot
     public class ShoppingCartSnapshot
     {
         public string UserId { get; set; }
-        public decimal TotalAmountfterDiscount { get; set; }
+        public decimal TotalAmountAfterDiscount { get; set; }
         public List<ShoppingCartItemSnapshot> Items { get; set; }
     }
 

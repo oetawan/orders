@@ -22,7 +22,7 @@ namespace order.model.specs.ShoppingCartSpecs
 
             ShoppingCartSnapshot snapshot = sc.CreateSnapshot();
 
-            Assert.AreEqual(10000000m, snapshot.TotalAmountfterDiscount);
+            Assert.AreEqual(10000000m, snapshot.TotalAmountAfterDiscount);
             Assert.AreEqual(10000000m, snapshot.Items[0].AmountAfterDiscount);
             Assert.AreEqual(10, snapshot.Items[0].Qty);
             Assert.AreEqual(1000000m, snapshot.Items[0].Price);
@@ -36,7 +36,7 @@ namespace order.model.specs.ShoppingCartSpecs
 
             ShoppingCartSnapshot snapshot = sc.CreateSnapshot();
 
-            Assert.AreEqual(20000000m, snapshot.TotalAmountfterDiscount);
+            Assert.AreEqual(20000000m, snapshot.TotalAmountAfterDiscount);
         }
     }
 }

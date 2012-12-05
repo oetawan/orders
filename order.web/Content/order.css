@@ -54,9 +54,10 @@ td.number, td.currency
     text-align: right;
 }
 
-div.checkout-view .action 
+div.checkout-view-amount, div.checkout-view-action
 {
     text-align: center;
+    margin-top: 20px;
 }
 div.checkout-view .action button
 {
@@ -66,4 +67,9 @@ div.checkout-view .action button
 .hidden 
 {
     display: none;
+}
+
+.checkout-view-confirm, .confirm-checkout-label 
+{
+    text-align: center;
 }

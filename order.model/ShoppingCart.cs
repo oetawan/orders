@@ -23,7 +23,7 @@ namespace order.model
         {
             this.userId = snapshot.UserId;
             this.items = new List<ShoppingCartItem>();
-            this.totalAmountAfterDiscount = snapshot.TotalAmountfterDiscount;
+            this.totalAmountAfterDiscount = snapshot.TotalAmountAfterDiscount;
             snapshot.Items.ForEach(itemSnapshot => {
                 items.Add(ShoppingCartItem.FromSnapshot(itemSnapshot));
             });
@@ -38,7 +38,7 @@ namespace order.model
             });
 
             ShoppingCartSnapshot snapshot = new ShoppingCartSnapshot { 
-                TotalAmountfterDiscount = this.totalAmountAfterDiscount,
+                TotalAmountAfterDiscount = this.totalAmountAfterDiscount,
                 Items = itemsSnapshot,
                 UserId = this.userId
             };
@@ -49,6 +49,11 @@ namespace order.model
         public static ShoppingCart FromSnapshot(ShoppingCartSnapshot snapshot)
         {
             return new ShoppingCart(snapshot);
+        }
+
+        private void Sum()
+        {
+            this.totalAmountAfterDiscount = items.Sum(item => item.CreateSnapshot().AmountAfterDiscount);
         }
 
         #region Behaviour
@@ -68,13 +73,22 @@ namespace order.model
             this.totalAmountAfterDiscount = items.Sum(item => item.CreateSnapshot().AmountAfterDiscount);
         }
 
+        public void ChangeQty(ChangeQtyCommand cmd)
+        {
+            ShoppingCartItem existingItem = items.Where(item => item.CreateSnapshot().ItemId == cmd.ItemId).FirstOrDefault();
+            if (existingItem != null)
+                existingItem.ChangeQty(cmd.Qty);
+
+            Sum();
+        }
+
         public void RemoveItem(RemoveItemCommand cmd)
         {
             ShoppingCartItem existingItem = items.Where(item => item.CreateSnapshot().ItemId == cmd.ItemId).FirstOrDefault();
             if (existingItem != null)
                 items.Remove(existingItem);
 
-            this.totalAmountAfterDiscount = items.Sum(item => item.CreateSnapshot().AmountAfterDiscount);
+            Sum();
         }
 
         #endregion
@@ -91,6 +105,13 @@ namespace order.model
             public string ItemCode { get; set; }
             public string ItemName { get; set; }
             public string UnitCode { get; set; }
+        }
+
+        public class ChangeQtyCommand
+        {
+            public int ItemId { get; set; }
+            public decimal Qty { get; set; }
+            public string Username {get;set;}
         }
 
         public class RemoveItemCommand
@@ -121,7 +142,7 @@ namespace order.model
                 this.itemId = itemId;
                 this.qty = qty;
                 this.price = price;
-                this.amountAfterDiscount = qty * price;
+                Calculate();
 
                 this.itemCode = itemCode;
                 this.itemName = itemName;
@@ -133,7 +154,18 @@ namespace order.model
                 return new ShoppingCartItem(itemId, qty, price, itemCode, itemName, unitCode);
             }
 
+            public void ChangeQty(decimal qty)
+            {
+                this.qty = qty;
+                Calculate();   
+            }
+
             #endregion
+
+            private void Calculate()
+            {
+                this.amountAfterDiscount = this.qty * this.price;
+            }
 
             private ShoppingCartItem() { }
 
