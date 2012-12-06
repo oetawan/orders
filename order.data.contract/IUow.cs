@@ -14,6 +14,7 @@ namespace order.data.contract
         IRepository<UserCustomerMapping> UserCustomerMapping { get; }
         IRepository<Branch> Branches { get; }
         IShoppingCartRepository ShoppingCarts { get; }
+        IRepository<Order> Orders { get; }
         void Commit();
     }
 }

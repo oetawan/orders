@@ -27,7 +27,7 @@ namespace order.web.Controllers
         public ActionResult Index()
         {
             ViewBag.Title = OrderSession.Branch.BranchName;
-            ViewBag.VendorName = OrderSession.Vendor.Name;
+            ViewBag.VendorName = OrderSession.Customer.CustomerName;
             
             return View();
         }
@@ -110,6 +110,22 @@ namespace order.web.Controllers
                 order.service.contract.IOrderService orderService = ObjectFactory.GetInstance<order.service.contract.IOrderService>();
                 orderService.RemoveItem(cmd);
                 
+                return Json(new { success = true });
+            });
+        }
+
+        [HttpPost]
+        public JsonResult Checkout()
+        {
+            return CatchPosibleExeption(() =>
+            {
+                order.model.ShoppingCart.CheckoutCommand cmd = new ShoppingCart.CheckoutCommand { 
+                    BranchCode = OrderSession.Branch.BranchCode,
+                    Username = this.User.Identity.Name
+                };
+                order.service.contract.IOrderService orderService = ObjectFactory.GetInstance<order.service.contract.IOrderService>();
+                orderService.CheckoutOut(cmd);
+
                 return Json(new { success = true });
             });
         }

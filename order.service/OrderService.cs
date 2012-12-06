@@ -1,6 +1,7 @@
 ﻿using order.data.contract;
 using order.model;
 using order.service.contract;
+using order.snapshot;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,6 +42,47 @@ namespace order.service
                 ShoppingCart sc = uow.ShoppingCarts.Get(cmd.Username);
                 sc.RemoveItem(cmd);
                 uow.ShoppingCarts.Save(sc);
+            });
+        }
+
+        public void CheckoutOut(ShoppingCart.CheckoutCommand cmd)
+        {
+            cmdExecutor.Execute(uow => {
+                ShoppingCart sc = uow.ShoppingCarts.Get(cmd.Username);
+                if (sc == null) return;
+
+                ShoppingCartSnapshot snapshot = sc.CreateSnapshot();
+
+                List<OrderItem> items = new List<OrderItem>();
+                Order order = new Order
+                {
+                    UserId = cmd.Username,
+                    TotalAmountAfterDiscount = snapshot.TotalAmountAfterDiscount,
+                    Items = items
+                };
+
+                snapshot.Items.ForEach(itemSnapshot => {
+                    items.Add(new OrderItem
+                    {
+                        Order = order,
+                        ItemId = itemSnapshot.ItemId,
+                        ItemCode = itemSnapshot.ItemCode,
+                        ItemName = itemSnapshot.ItemName,
+                        UnitCode = itemSnapshot.UnitCode,
+                        Price = itemSnapshot.Price,
+                        Qty = itemSnapshot.Qty,
+                        AmountAfterDiscount = itemSnapshot.AmountAfterDiscount
+                    });
+                });
+
+                sc.Clear();
+
+                uow.Orders.Add(order);
+                uow.ShoppingCarts.Save(sc);
+                uow.Commit();
+
+                order.OrderNumber = cmd.BranchCode + "-" + order.Id.ToString();
+                uow.Orders.Update(order);
             });
         }
     }

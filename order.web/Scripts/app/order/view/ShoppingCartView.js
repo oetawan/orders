@@ -1,15 +1,16 @@
 ﻿/// <reference path="../../../backbone.js" />
 /// <reference path="../../../underscore.js" />
 
-define(['jquery', 'underscore', 'backbone', 'app/eventAggregator','app/order/view/ShoppingCartItemView'], function ($, _, Backbone, EA, ShoppingCartItemView) {
+define(['jquery', 'underscore', 'backbone', 'app/eventAggregator','app/order/view/ShoppingCartItemView', 'app/order/model/CheckoutCommand'], function ($, _, Backbone, EA, ShoppingCartItemView, CheckoutCommand) {
     return Backbone.View.extend({
         className: 'row-fluid',
         events: {
-            'click button.checkout-command': 'checkout'
+            'click button.checkout-command': 'confirmCheckout'
         },
         initialize: function () {
             this.model.on('change', function () {
                 this.showAmount();
+                this.toggleCheckoutButton();
             }, this);
         },
         render: function () {
@@ -17,6 +18,7 @@ define(['jquery', 'underscore', 'backbone', 'app/eventAggregator','app/order/vie
             this.renderTable();
             this.showAmount();
             this.addAllItems();
+            this.toggleCheckoutButton();
             $('.currency', this.$el).formatCurrency({ colorize: true, region: 'id-ID' });
             return this;
         },
@@ -32,7 +34,7 @@ define(['jquery', 'underscore', 'backbone', 'app/eventAggregator','app/order/vie
             var html = "<table class='table table-striped table-hover table-checkout'>\
                             <thead>\
                                 <tr>\
-                                    <td>No</td>\
+                                    <td class='number'>No</td>\
                                     <td>Item Code</td>\
                                     <td>Item Name</td>\
                                     <td class='number'>Qty</td>\
@@ -65,14 +67,28 @@ define(['jquery', 'underscore', 'backbone', 'app/eventAggregator','app/order/vie
             var view = new ShoppingCartItemView({ model: scItemModel, shoppingCart: this.model });
             $('div.checkout-view-table tbody', this.$el).append(view.render().el);
         },
-        checkout: function () {
+        confirmCheckout: function () {
+            var self = this;
             var html = $(_.template('<div class="well checkout-view-confirm">' +
                                     '<h2>Total ' + this.model.get('Items').length + ' item(s):</h2><h2 id="total-amount"><%= TotalAmountAfterDiscount %></h2>' +
                                     '</div><div class="confirm-checkout-label"><i>Click <b>OK</b> to checkout, or <b>Cancel</b> to continue shopping</i></div>', this.model.toJSON()));
             $('#total-amount', html).formatCurrency({ colorize: true, region: 'id-ID' });
             bootbox.confirm(html, function (isOK) {
-                
+                if (isOK) {
+                    self.checkout();
+                }
             });
+        },
+        checkout: function () {
+            var cmd = new CheckoutCommand();
+            cmd.execute();
+        },
+        toggleCheckoutButton: function () {
+            if (this.model.get('Items').length > 0) {
+                $('button.checkout-command', this.$el).show();
+            } else {
+                $('button.checkout-command', this.$el).hide();
+            }
         }
     });
 });

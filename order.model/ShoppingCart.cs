@@ -91,6 +91,11 @@ namespace order.model
             Sum();
         }
 
+        public void Clear() {
+            items.Clear();
+            Sum();
+        }
+
         #endregion
 
         #region Command
@@ -118,6 +123,12 @@ namespace order.model
         {
             public int ItemId { get; set; }
             public string Username { get; set; }
+        }
+
+        public class CheckoutCommand
+        {
+            public string Username { get; set; }
+            public string BranchCode { get; set; }
         }
 
         #endregion

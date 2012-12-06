@@ -31,12 +31,14 @@ namespace order.data
             this.UserCustomerMapping = new EFRepository<UserCustomerMapping>(this.DbContext);
             this.Branches = new EFRepository<Branch>(this.DbContext);
             this.ShoppingCarts = new ShoppingCartRepository(this.DbContext);
+            this.Orders = new EFRepository<Order>(this.DbContext);
         }
 
         public IRepository<Customer> Customers { get; private set; }
         public IRepository<UserCustomerMapping> UserCustomerMapping { get; private set; }
         public IRepository<Branch> Branches { get; private set; }
         public IShoppingCartRepository ShoppingCarts { get; set; }
+        public IRepository<Order> Orders { get; set; }
 
         public void Commit()
         {

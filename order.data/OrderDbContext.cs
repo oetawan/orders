@@ -1,4 +1,5 @@
-﻿using order.data.Migrations;
+﻿using order.data.Configuration;
+using order.data.Migrations;
 using order.model;
 using order.snapshot;
 using System;
@@ -21,6 +22,7 @@ namespace order.data
         public DbSet<UserCustomerMapping> UserCustomerMapping { get; set; }
         public DbSet<Branch> Branches { get; set; }
         public DbSet<ShoppingCartStore> ShoppingCarts { get; set; }
+        public DbSet<Order> Orders { get; set; }
         
         static OrderDbContext()
         {
@@ -29,7 +31,7 @@ namespace order.data
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            
+            modelBuilder.Configurations.Add<Order>(new OrderConfiguration());           
         }
     }
 }

@@ -73,3 +73,16 @@ div.checkout-view .action button
 {
     text-align: center;
 }
+
+.checkout-success-alert 
+{
+    text-align: center;
+    color: green;
+    font-size: 40px;
+    margin-top: 40px;
+}
+
+.checkout-success-alert h3
+{
+    margin-top: 20px;
+}

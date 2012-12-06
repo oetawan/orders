@@ -1,7 +1,7 @@
 ﻿/// <reference path="../../../backbone.js" />
 /// <reference path="../../../underscore.js" />
 
-define(['jquery', 'underscore', 'backbone', 'app/eventAggregator','app/order/model/ChangeQtyCommand'], function ($, _, Backbone, EA, ChangeQtyCommand) {
+define(['jquery', 'underscore', 'backbone', 'app/eventAggregator', 'app/order/model/ChangeQtyCommand', 'app/order/model/RemoveOrderItemCommand'], function ($, _, Backbone, EA, ChangeQtyCommand, RemoveOrderItemCommand) {
     return Backbone.View.extend({
         tagName: 'tr',
         template: _.template('<td class="number"><%= Index %></td>\
@@ -25,6 +25,11 @@ define(['jquery', 'underscore', 'backbone', 'app/eventAggregator','app/order/mod
                 }
             }, this);
         },
+        toggleSaved: function () {
+            $('a.update-qty', this.$el).removeClass('btn-warning');
+            $('a.update-qty', this.$el).addClass('btn-success');
+            $('a.update-qty', this.$el).html('Saved');
+        },
         render: function () {
             this.$el.html(this.template(this.model.toJSON()));
             $('input.inputQty', this.$el).css('width', '60px');
@@ -33,9 +38,12 @@ define(['jquery', 'underscore', 'backbone', 'app/eventAggregator','app/order/mod
         },
         events: {
             'change input.inputQty': 'toggleButton',
-            'click a.update-qty': 'changeQty'
+            'click a.update-qty': 'changeQty',
+            'click a.remove-item': 'removeItem'
         },
         changeQty: function (e) {
+            e.preventDefault();
+            var that = this;
             if (this.model.get("Qty") != $('input.inputQty', this.$el).val()) {
                 var that = this;
                 var itemId = this.model.get('ItemId');
@@ -44,19 +52,62 @@ define(['jquery', 'underscore', 'backbone', 'app/eventAggregator','app/order/mod
                     ItemId: itemId,
                     Qty: qty,
                     beforeSend: function () {
-                        that.$el.mask('Please wait while updating...');
+                        $('input.inputQty', that.$el).attr('disabled', 'disabled');
+                        $('a.update-qty', that.$el).hide();
+                        $('a.update-qty', that.$el).after('<div class="progress progress-indeterminate progress-update-qty"><div class="win-ring small"></div></div>');
                     },
                     complete: function () {
-                        that.$el.unmask();
+                        $('input.inputQty', that.$el).removeAttr('disabled');
+                        $('a.update-qty', that.$el).show();
+                        $('div.progress-update-qty', that.$el).remove();
+                    },
+                    success: function (model, response, options) {
+                        if (response.success === true) {
+                            that.toggleSaved();
+                            EA.trigger('order:changeqty-success', response);
+                        } else {
+                            bootbox.modal(response.errorMessage, 'Error');
+                        }
                     }
                 });
                 cmd.execute();
             }
         },
+        removeItem: function () {
+            var that = this;
+            var itemId = this.model.get('ItemId');
+            var cmd = new RemoveOrderItemCommand({
+                ItemId: itemId,
+                beforeSend: function () {
+                    $('input.inputQty', that.$el).attr('disabled', 'disabled');
+                    $('a.update-qty', that.$el).hide();
+                    $('a.remove-item', that.$el).hide();
+                    $('a.remove-item', that.$el).after('<div class="progress progress-indeterminate progress-remove-item"><div class="win-ring small"></div></div>');
+                },
+                complete: function () {
+                    $('input.inputQty', that.$el).removeAttr('disabled');
+                    $('a.update-qty', that.$el).show();
+                    $('a.remove-item', that.$el).show();
+                    $('div.progress-remove-item', that.$el).remove();
+                },
+                success: function (model, response, options) {
+                    if (response.success === true) {
+                        EA.trigger('order:removeorderitemsuccess', response);
+                        that.remove();
+                    } else {
+                        bootbox.modal(response.errorMessage, 'Error');
+                    }
+                }
+            });
+            cmd.execute();
+        },
         toggleButton: function (e) {
             var enabled = this.model.get("Qty") != $('input.inputQty', this.$el).val();
             if (enabled) {
                 $('a.update-qty', this.$el).removeAttr('disabled');
+                $('a.update-qty', this.$el).removeClass('btn-success');
+                $('a.update-qty', this.$el).addClass('btn-warning');
+                $('a.update-qty', this.$el).html('Update');
             } else {
                 $('a.update-qty', this.$el).attr('disabled', 'disabled');
             }

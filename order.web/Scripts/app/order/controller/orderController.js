@@ -151,6 +151,12 @@
             fetchShoppingCart();
         });
 
+        EA.on('order:checkout-success', function () {
+            bootbox.alert('<div class="checkout-success-alert" aria-hidden="true" data-icon=""><h3>Checkout Success</h3></div>');
+            $('a#back-to-listitem-menu').click();
+            fetchShoppingCart();
+        });
+
         return {
             show: show
         }

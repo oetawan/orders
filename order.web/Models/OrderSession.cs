@@ -48,7 +48,7 @@ namespace order.web.Models
                 {
                     using(var ch = OrderServiceChannelFactory.CreateChannel())
                     {
-                        httpSession[VENDOR] = ch.FindVendorByCode(Customer.CustomerCode);
+                        httpSession[VENDOR] = ch.FindVendorByCode(Branch.BranchCode);
                     }
                 }
 

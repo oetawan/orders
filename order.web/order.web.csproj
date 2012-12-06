@@ -435,6 +435,7 @@
     <Content Include="Scripts\app\order\main.js" />
     <Content Include="Scripts\app\order\model\AddToOrderCommand.js" />
     <Content Include="Scripts\app\order\model\ChangeQtyCommand.js" />
+    <Content Include="Scripts\app\order\model\CheckoutCommand.js" />
     <Content Include="Scripts\app\order\model\RemoveOrderItemCommand.js" />
     <Content Include="Scripts\app\order\model\SearchItemList.js" />
     <Content Include="Scripts\app\order\model\ItemList.js" />

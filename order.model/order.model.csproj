@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="Branch.cs" />
     <Compile Include="Customer.cs" />
+    <Compile Include="Order.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ShoppingCart.cs" />
     <Compile Include="UserCustomerMapping.cs" />

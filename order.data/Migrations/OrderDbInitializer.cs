@@ -18,11 +18,13 @@ namespace order.data.Migrations
             context.Customers.Add(new Customer { LicenseId = "9898434389", CustomerCode = "SBC", CustomerName = "Starbuck Coffee", Registered = false, ServiceBusNamespace = "zainorder", Issuer = "owner", SecretKey = "01NCCo0nGzshAWfZymfA0ES8f8v9Qwx4U/JqlR68ApM=" });
 
             context.Database.ExecuteSqlCommand(@"CREATE UNIQUE NONCLUSTERED INDEX [IX_Customers_LicenseId]
-                                                 ON [dbo].[Customers]([LicenseId] ASC)");
+                                                 ON [dbo].[Customers]([LicenseId] ASC);");
             context.Database.ExecuteSqlCommand(@"CREATE UNIQUE NONCLUSTERED INDEX [IX_Customers_CustomerCode]
                                                  ON [dbo].[Customers]([CustomerCode] ASC);");
             context.Database.ExecuteSqlCommand(@"CREATE UNIQUE NONCLUSTERED INDEX [IX_Branches_Username]
                                                  ON [dbo].[Branches]([Username] ASC);");
+            context.Database.ExecuteSqlCommand(@"CREATE UNIQUE NONCLUSTERED INDEX [IX_ShoppingCartStores_UserId] 
+                                                 ON [dbo].[ShoppingCartStores]([UserId] ASC);");
         }
     }
 }
