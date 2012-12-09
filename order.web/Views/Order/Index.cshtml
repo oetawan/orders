@@ -29,9 +29,11 @@
                         </div>
                     </form>
                     <ul class="nav pull-right">
+                        <li><a href="#" class="order-history-menu"><i class="icon-history"></i> Order history</a></li>
                         <li class="divider-vertical"></li>
-                        <li><a id="back-to-listitem-menu" href="#" aria-hidden="true" data-icon=""> Back</a></li>
                         <li><a class="brand" href="#"><span aria-hidden="true" data-icon="<"></span> <span id="order-qty-total"></span> item(s): <span id="order-amount">0</span></a></li>
+                        <li class="divider-vertical back-divider"></li>
+                        <li><a id="back-to-listitem-menu" href="#" aria-hidden="true" data-icon="!"></a></li>
                     </ul>
                 </div>
             </div><!-- end of container-->
@@ -48,6 +50,8 @@
             <button class="btn btn-large btn-success hidden checkout-command">Checkout</button>
         </div>
     </div>
+</div>
+<div class="metro span12 order-history-view">
 </div>
 <div class="order-error-container"></div>
 @section scripts

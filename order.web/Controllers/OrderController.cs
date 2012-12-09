@@ -12,12 +12,15 @@ using Microsoft.ServiceBus;
 using order.web.Models;
 using order.snapshot;
 using StructureMap;
+using System.Transactions;
 namespace order.web.Controllers
 {
     public class OrderController : Controller
     {
         const string ORDER_SESSION = "OrderSession";
         IOrderUow orderUow;
+        OrderNumber orderNumber;
+        porder.model.Order po;
         
         public OrderController(IOrderUow uow)
         {
@@ -119,14 +122,89 @@ namespace order.web.Controllers
         {
             return CatchPosibleExeption(() =>
             {
-                order.model.ShoppingCart.CheckoutCommand cmd = new ShoppingCart.CheckoutCommand { 
+                orderNumber = this.orderUow.ShoppingCarts.GetOrderNumber(OrderSession.Branch.BranchCode);
+                orderNumber.Next();
+                this.orderUow.ShoppingCarts.SaveOrderNumber(orderNumber);
+                
+                using (var porderServiceChannel = OrderSession.OrderServiceChannelFactory.CreateChannel())
+                {
+                    ShoppingCart sc = this.orderUow.ShoppingCarts.Get(this.User.Identity.Name);
+                    if (sc == null)
+                        throw new ApplicationException("Shopping cart not found");
+
+                    ShoppingCartSnapshot snapshot = sc.CreateSnapshot();
+                    List<porder.model.OrderItem> porderItems = new List<porder.model.OrderItem>();
+                    int orderItemSequence = 0;
+                    foreach (ShoppingCartItemSnapshot itemSnapshot in snapshot.Items)
+                    {
+                        porderItems.Add(new porder.model.OrderItem
+                        {
+                            SOSeq = ++orderItemSequence,
+                            ItemID = itemSnapshot.ItemId,
+                            UnitCode = itemSnapshot.UnitCode,
+                            Price = itemSnapshot.Price,
+                            Quantity = itemSnapshot.Qty,
+                            GrossAmt = itemSnapshot.AmountAfterDiscount,
+                            SubTotal = itemSnapshot.AmountAfterDiscount
+                        });
+                    }
+                    po = new porder.model.Order
+                    {
+                        Items = porderItems,
+                        BranchID = OrderSession.Branch.BranchCode,
+                        SOCode = orderNumber.OrderNumberString(),
+                        CurrencyId = "IDR",
+                        SODate = DateTime.Today,
+                        Username = this.User.Identity.Name,
+                        VendorID = this.OrderSession.Branch.BranchCode,
+                        SOGrossAmt = snapshot.TotalAmountAfterDiscount,
+                        SONetAmt = snapshot.TotalAmountAfterDiscount
+                    };
+                    porder.model.CreateOrderResponse response = porderServiceChannel.CreateOrder(po);
+                    if (response.Error)
+                        throw new ApplicationException(response.ErrorMessage);
+                };
+
+                order.model.ShoppingCart.CheckoutCommand cmd = new ShoppingCart.CheckoutCommand
+                {
+                    BranchId = OrderSession.Branch.Id,
+                    OrderDate = po.SODate,
+                    OrderNumber = this.orderNumber.OrderNumberString(),
                     BranchCode = OrderSession.Branch.BranchCode,
                     Username = this.User.Identity.Name
                 };
-                order.service.contract.IOrderService orderService = ObjectFactory.GetInstance<order.service.contract.IOrderService>();
-                orderService.CheckoutOut(cmd);
+
+                var explicitArgs = new StructureMap.Pipeline.ExplicitArguments();
+                explicitArgs.SetArg("orderUow", this.orderUow);
+
+                order.service.contract.IOrderService orderService = ObjectFactory.GetInstance<order.service.contract.IOrderService>(explicitArgs);
+                orderService.CheckoutOut(cmd, () => { this.orderUow.ShoppingCarts.SaveOrderNumber(orderNumber); });
 
                 return Json(new { success = true });
+            });
+        }
+
+        [HttpGet]
+        public JsonResult OrderItems(int orderId)
+        {
+            return CatchPosibleExeption(() =>
+            {
+                IList<order.model.OrderItem> result = orderUow.ShoppingCarts.FindOrderItem(orderId);
+
+                return Json(result, JsonRequestBehavior.AllowGet);
+            });
+        }
+
+        [HttpGet]
+        public JsonResult All()
+        {
+            return CatchPosibleExeption(() => {
+
+                IList<order.model.Order> result = orderUow.Orders.
+                    Where(o => o.BranchId == OrderSession.Branch.Id).
+                    OrderByDescending(o => o.OrderDate).ToList();
+
+                return Json(result, JsonRequestBehavior.AllowGet);
             });
         }
 

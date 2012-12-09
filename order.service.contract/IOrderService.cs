@@ -12,6 +12,6 @@ namespace order.service.contract
         void AddItemToOrder(ShoppingCart.AddItemCommand cmd);
         void ChangeQty(ShoppingCart.ChangeQtyCommand cmd);
         void RemoveItem(ShoppingCart.RemoveItemCommand cmd);
-        void CheckoutOut(ShoppingCart.CheckoutCommand cmd);
+        void CheckoutOut(ShoppingCart.CheckoutCommand cmd, Action beforeAction);
     }
 }

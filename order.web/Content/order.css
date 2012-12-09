@@ -49,7 +49,7 @@ div.control-group.input-container
     display: inline-block;
 }
 
-td.number, td.currency 
+td.number, td.currency, th.number
 {
     text-align: right;
 }
@@ -85,4 +85,14 @@ div.checkout-view .action button
 .checkout-success-alert h3
 {
     margin-top: 20px;
+}
+a#back-to-listitem-menu 
+{
+    font-size: 28px;
+    color: blue;
+}
+
+div.metro.span12.order-history-view 
+{
+    margin-left: 0;
 }

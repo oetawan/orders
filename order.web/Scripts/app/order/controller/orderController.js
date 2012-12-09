@@ -11,10 +11,14 @@
         'bootbox',
         'app/order/model/ShoppingCart',
         'app/order/view/ShoppingCartView',
-        'app/eventAggregator'], function ($, _, Backbone, GroupList, GroupListView, ErrorView, ProgressWinRing, ItemList, SearchItemList, ItemListView, bootbox, ShoppingCart, ShoppingCartView, EA) {
+        'app/order/model/OrderList',
+        'app/order/view/OrderListView',
+        'app/order/view/Progress',
+        'app/eventAggregator'], function ($, _, Backbone, GroupList, GroupListView, ErrorView, ProgressWinRing, ItemList, SearchItemList, ItemListView, bootbox, ShoppingCart, ShoppingCartView, OrderList, OrderListView, Progress, EA) {
 
     return function() {
         var shoppingCart = new ShoppingCart();
+        var progress = new Progress();
         var progressWinRing = new ProgressWinRing();
         var groupList = new GroupList();
         var itemList = new ItemList();
@@ -22,6 +26,9 @@
         var groupListView = new GroupListView({ collection: groupList });
         var itemListView = new ItemListView({ collection: itemList, 'shoppingCart': shoppingCart });
         var searchItemListView = new ItemListView({ collection: searchItemList, 'shoppingCart': shoppingCart });
+        var orderList = new OrderList();
+        var orderListView = new OrderListView({ collection: orderList });
+
         var showError = function (err) {
             var errView = new ErrorView({ model: err });
             $('div.order-error-container').html(errView.render().el);
@@ -29,8 +36,10 @@
 
         var show = function () {
             $('a#back-to-listitem-menu').hide();
+            $('.divider-vertical.back-divider').hide();
             $('div.search-item-view').hide();
             $('div.checkout-view').hide();
+            $('div.order-history-view').hide();
             $('div.search-item-view').html(searchItemListView.render().el);
             $('.metro.span12.search-item-view').css('margin-left', '0'); 
             $('div.checkout-view').css('margin-left', '0');
@@ -72,11 +81,13 @@
                 data: { 'searchQuery': searhQuery },
                 beforeSend: function () {
                     $('a#back-to-listitem-menu').show();
+                    $('.divider-vertical.back-divider').show();
                     $('div.search-item-view').show();
                     $('div.noitemfound').html('<i><h3>Searching...</h3></i>');
                     $('div.group-view').hide();
                     $('div.item-view').hide();
                     $('div.checkout-view').hide();
+                    $('div.order-history-view').hide();
                     $('div.search-item-view').mask('Loading...');
                 },
                 complete: function () {
@@ -94,11 +105,36 @@
 
         var showShoppingCart = function (e) {
             $('a#back-to-listitem-menu').show();
+            $('.divider-vertical.back-divider').show();
             $('div.search-item-view').hide();
             $('div.group-view').hide();
             $('div.item-view').hide();
+            $('div.order-history-view').hide();
             $('div.checkout-view').show();
             $('div.checkout-view').html(new ShoppingCartView({ model: shoppingCart }).render().el);
+        }
+
+        var showOrderHistory = function (e) {
+            $('a#back-to-listitem-menu').show();
+            $('.divider-vertical.back-divider').show();
+            $('div.search-item-view').hide();
+            $('div.group-view').hide();
+            $('div.item-view').hide();
+            $('div.checkout-view').hide();
+            $('div.order-history-view').show();
+            $('div.order-history-view').html(orderListView.render().el);
+
+            orderList.fetch({
+                beforeSend: function () {
+                    $('div.order-history-view').append(progress.render().el);
+                },
+                complete: function () {
+                    progress.remove();
+                },
+                error: function (model, xhr) {
+                    showError(new Backbone.Model({ errorMessage: xhr.statusText + " (" + xhr.status + ")" }));
+                }
+            });
         }
 
         EA.on('shoppingcart:fetch-success', function () {
@@ -123,13 +159,17 @@
         $('a#back-to-listitem-menu').on('click', function (e) {
             e.preventDefault();
             $('a#back-to-listitem-menu').hide();
+            $('.divider-vertical.back-divider').hide();
             $('div.search-item-view').hide();
             $('div.checkout-view').hide();
+            $('div.order-history-view').hide();
             $('div.group-view').show();
             $('div.item-view').show();
         });
 
         $('a.brand').click(showShoppingCart);
+
+        $('a.order-history-menu').click(showOrderHistory);
 
         var fetchShoppingCart = function () {
             shoppingCart.fetch({

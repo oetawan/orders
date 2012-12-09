@@ -127,6 +127,9 @@ namespace order.model
 
         public class CheckoutCommand
         {
+            public int BranchId { get; set; }
+            public DateTime OrderDate { get; set; }
+            public string OrderNumber { get; set; }
             public string Username { get; set; }
             public string BranchCode { get; set; }
         }

@@ -14,7 +14,8 @@ namespace order.data.Configuration
         {
             HasMany(o => o.Items)
             .WithRequired(item => item.Order)
-            .Map(x => x.MapKey("OrderId"));
+            .Map(x => x.MapKey("OrderId"))
+            .WillCascadeOnDelete(true);
         }
     }
 }

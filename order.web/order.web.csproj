@@ -436,6 +436,10 @@
     <Content Include="Scripts\app\order\model\AddToOrderCommand.js" />
     <Content Include="Scripts\app\order\model\ChangeQtyCommand.js" />
     <Content Include="Scripts\app\order\model\CheckoutCommand.js" />
+    <Content Include="Scripts\app\order\model\OrderItem.js" />
+    <Content Include="Scripts\app\order\model\OrderList.js" />
+    <Content Include="Scripts\app\order\model\OrderItemList.js" />
+    <Content Include="Scripts\app\order\model\Order.js" />
     <Content Include="Scripts\app\order\model\RemoveOrderItemCommand.js" />
     <Content Include="Scripts\app\order\model\SearchItemList.js" />
     <Content Include="Scripts\app\order\model\ItemList.js" />
@@ -443,6 +447,11 @@
     <Content Include="Scripts\app\order\model\Group.js" />
     <Content Include="Scripts\app\order\model\Item.js" />
     <Content Include="Scripts\app\order\model\ShoppingCart.js" />
+    <Content Include="Scripts\app\order\view\OrderItemListView.js" />
+    <Content Include="Scripts\app\order\view\OrderItemView.js" />
+    <Content Include="Scripts\app\order\view\Progress.js" />
+    <Content Include="Scripts\app\order\view\OrderView.js" />
+    <Content Include="Scripts\app\order\view\OrderListView.js" />
     <Content Include="Scripts\app\order\view\ShoppingCartItemView.js" />
     <Content Include="Scripts\app\order\view\ItemListView.js" />
     <Content Include="Scripts\app\order\view\ItemView.js" />

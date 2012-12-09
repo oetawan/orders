@@ -11,5 +11,8 @@ namespace order.data.contract
     {
         ShoppingCart Get(string username);
         void Save(ShoppingCart sc);
+        OrderNumber GetOrderNumber(string branchId);
+        void SaveOrderNumber(OrderNumber orderNumber);
+        IList<OrderItem> FindOrderItem(int orderId);
     }
 }

@@ -45,9 +45,14 @@ namespace order.service
             });
         }
 
-        public void CheckoutOut(ShoppingCart.CheckoutCommand cmd)
+        public void CheckoutOut(ShoppingCart.CheckoutCommand cmd, Action beforeAction)
         {
             cmdExecutor.Execute(uow => {
+                if (beforeAction != null)
+                {
+                    beforeAction();
+                }
+
                 ShoppingCart sc = uow.ShoppingCarts.Get(cmd.Username);
                 if (sc == null) return;
 
@@ -56,6 +61,10 @@ namespace order.service
                 List<OrderItem> items = new List<OrderItem>();
                 Order order = new Order
                 {
+                    BranchId = cmd.BranchId,
+                    OrderDate = cmd.OrderDate,
+                    OrderDateString = cmd.OrderDate.ToString("dd-MM-yyyy"),
+                    OrderNumber = cmd.OrderNumber,
                     UserId = cmd.Username,
                     TotalAmountAfterDiscount = snapshot.TotalAmountAfterDiscount,
                     Items = items
@@ -79,10 +88,6 @@ namespace order.service
 
                 uow.Orders.Add(order);
                 uow.ShoppingCarts.Save(sc);
-                uow.Commit();
-
-                order.OrderNumber = cmd.BranchCode + "-" + order.Id.ToString();
-                uow.Orders.Update(order);
             });
         }
     }

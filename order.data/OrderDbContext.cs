@@ -23,6 +23,7 @@ namespace order.data
         public DbSet<Branch> Branches { get; set; }
         public DbSet<ShoppingCartStore> ShoppingCarts { get; set; }
         public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderNumber> OrderNumbers { get; set; }
         
         static OrderDbContext()
         {

@@ -9,8 +9,11 @@ namespace order.model
 
     public class Order
     {
+        public int BranchId { get; set; }
         public int Id { get; set; }
         public string UserId { get; set; }
+        public DateTime OrderDate { get; set; }
+        public string OrderDateString { get; set; }
         public string OrderNumber { get; set; }
         public decimal TotalAmountAfterDiscount { get; set; }
         public List<OrderItem> Items { get; set; }
