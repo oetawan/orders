@@ -68,7 +68,7 @@
            <div class="row-fluid">
                <div class="span12">
                    <ul class="settings-menu">
-                       <li><button id="settings-menu-changepassword" class="btn btn-large" type="button">Change Password</button></li>
+                       <li><button id="settings-menu-changepassword" class="btn btn-large btn-change-password" type="button">Change Password</button></li>
                        <li>
                            @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" })) {
                            @Html.AntiForgeryToken()

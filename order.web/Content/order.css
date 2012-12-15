@@ -96,3 +96,16 @@ div.metro.span12.order-history-view
 {
     margin-left: 0;
 }
+
+li.error-list-item 
+{
+    list-style-type: none;
+    color: red;
+}
+
+div.error-panel 
+{
+    text-align: center;
+    padding: 20px;
+    border: 1px solid #e2dede;
+}

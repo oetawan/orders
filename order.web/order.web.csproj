@@ -447,6 +447,7 @@
     <Content Include="Scripts\app\order\model\Group.js" />
     <Content Include="Scripts\app\order\model\Item.js" />
     <Content Include="Scripts\app\order\model\ShoppingCart.js" />
+    <Content Include="Scripts\app\order\view\ChangePasswordView.js" />
     <Content Include="Scripts\app\order\view\OrderItemListView.js" />
     <Content Include="Scripts\app\order\view\OrderItemView.js" />
     <Content Include="Scripts\app\order\view\Progress.js" />

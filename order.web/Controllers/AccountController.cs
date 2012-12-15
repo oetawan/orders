@@ -122,6 +122,73 @@ namespace order.web.Controllers
             return RedirectToAction("Manage", new { Message = message });
         }
 
+        [HttpPost]
+        //[ValidateAntiForgeryToken]
+        public JsonResult ChangePassword(LocalPasswordModel model)
+        {
+            bool hasLocalAccount = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
+            
+            if (hasLocalAccount)
+            {
+                if (ModelState.IsValid)
+                {
+                    // ChangePassword will throw an exception rather than return false in certain failure scenarios.
+                    bool changePasswordSucceeded;
+                    try
+                    {
+                        changePasswordSucceeded = WebSecurity.ChangePassword(User.Identity.Name, model.OldPassword, model.NewPassword);
+                    }
+                    catch (Exception)
+                    {
+                        changePasswordSucceeded = false;
+                    }
+
+                    if (changePasswordSucceeded)
+                    {
+                        return Json(new { success= true });
+                    }
+                    else
+                    {
+                        return Json(new { success = false, errorMessage = "The current password is incorrect or the new password is invalid." });
+                    }
+                }
+            }
+            else
+            {
+                // User does not have a local password so remove any validation errors caused by a missing
+                // OldPassword field
+                ModelState state = ModelState["OldPassword"];
+                if (state != null)
+                {
+                    state.Errors.Clear();
+                }
+
+                if (ModelState.IsValid)
+                {
+                    try
+                    {
+                        WebSecurity.CreateAccount(User.Identity.Name, model.NewPassword);
+                        return Json(new { success= true });
+                    }
+                    catch (Exception e)
+                    {
+                        return Json(new { success = false, errorMessage = e.GetInnerMostException().Message });
+                    }
+                }
+            }
+
+            // If we got this far, something failed, redisplay form
+            List<ModelError> oldPwdErrors = ModelState["OldPassword"].Errors.ToList();
+            List<ModelError> newPwdErrors = ModelState["NewPassword"].Errors.ToList();
+            List<ModelError> confirmPwdErrors = ModelState["ConfirmPassword"].Errors.ToList();
+            List<ModelError> allErrors = new List<ModelError>();
+            allErrors.AddRange(oldPwdErrors);
+            allErrors.AddRange(newPwdErrors);
+            allErrors.AddRange(confirmPwdErrors);
+            
+            return Json(new { success = false, errors= allErrors.Select(me => me.ErrorMessage).ToArray()});
+        }
+
         //
         // GET: /Account/Manage
 

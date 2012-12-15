@@ -50,22 +50,6 @@
   <ItemGroup>
     <Compile Include="Configuration\OrderConfiguration.cs" />
     <Compile Include="EFRepository.cs" />
-    <Compile Include="Migrations\201212090947356_AddOrderDateField.cs" />
-    <Compile Include="Migrations\201212090947356_AddOrderDateField.Designer.cs">
-      <DependentUpon>201212090947356_AddOrderDateField.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201212091052484_AddOrderDateStringToOrdersTable.cs" />
-    <Compile Include="Migrations\201212091052484_AddOrderDateStringToOrdersTable.Designer.cs">
-      <DependentUpon>201212091052484_AddOrderDateStringToOrdersTable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201212091327457_AddBranchIdFieldToOrdersTable.cs" />
-    <Compile Include="Migrations\201212091327457_AddBranchIdFieldToOrdersTable.Designer.cs">
-      <DependentUpon>201212091327457_AddBranchIdFieldToOrdersTable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201212091617315_CaeateOrderNumberTable.cs" />
-    <Compile Include="Migrations\201212091617315_CaeateOrderNumberTable.Designer.cs">
-      <DependentUpon>201212091617315_CaeateOrderNumberTable.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\OrderDbInitializer.cs" />
     <Compile Include="OrderDbContext.cs" />
@@ -95,20 +79,6 @@
       <Project>{5b8d4b78-1d71-492d-bca9-d272588d522e}</Project>
       <Name>order.snapshot</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201212090947356_AddOrderDateField.resx">
-      <DependentUpon>201212090947356_AddOrderDateField.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201212091052484_AddOrderDateStringToOrdersTable.resx">
-      <DependentUpon>201212091052484_AddOrderDateStringToOrdersTable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201212091327457_AddBranchIdFieldToOrdersTable.resx">
-      <DependentUpon>201212091327457_AddBranchIdFieldToOrdersTable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201212091617315_CaeateOrderNumberTable.resx">
-      <DependentUpon>201212091617315_CaeateOrderNumberTable.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

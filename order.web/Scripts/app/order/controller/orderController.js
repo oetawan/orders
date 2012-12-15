@@ -14,7 +14,9 @@
         'app/order/model/OrderList',
         'app/order/view/OrderListView',
         'app/order/view/Progress',
-        'app/eventAggregator'], function ($, _, Backbone, GroupList, GroupListView, ErrorView, ProgressWinRing, ItemList, SearchItemList, ItemListView, bootbox, ShoppingCart, ShoppingCartView, OrderList, OrderListView, Progress, EA) {
+        'app/eventAggregator',
+        'app/order/view/ChangePasswordView'],
+function ($, _, Backbone, GroupList, GroupListView, ErrorView, ProgressWinRing, ItemList, SearchItemList, ItemListView, bootbox, ShoppingCart, ShoppingCartView, OrderList, OrderListView, Progress, EA, ChangePasswordView) {
 
     return function() {
         var shoppingCart = new ShoppingCart();
@@ -28,6 +30,7 @@
         var searchItemListView = new ItemListView({ collection: searchItemList, 'shoppingCart': shoppingCart });
         var orderList = new OrderList();
         var orderListView = new OrderListView({ collection: orderList });
+        var changePasswordView = new ChangePasswordView();
 
         var showError = function (err) {
             var errView = new ErrorView({ model: err });
@@ -74,7 +77,7 @@
                     showError(new Backbone.Model({ errorMessage: xhr.statusText + " (" + xhr.status + ")" }));
                 }
             });
-        }
+        };
 
         var searchItem = function (searhQuery) {
             searchItemList.fetch({
@@ -101,7 +104,7 @@
                     bootbox.modal(xhr.responseText, xhr.statusText);
                 }
             });
-        }
+        };
 
         var showShoppingCart = function (e) {
             $('a#back-to-listitem-menu').show();
@@ -112,7 +115,7 @@
             $('div.order-history-view').hide();
             $('div.checkout-view').show();
             $('div.checkout-view').html(new ShoppingCartView({ model: shoppingCart }).render().el);
-        }
+        };
 
         var showOrderHistory = function (e) {
             $('a#back-to-listitem-menu').show();
@@ -135,6 +138,11 @@
                     showError(new Backbone.Model({ errorMessage: xhr.statusText + " (" + xhr.status + ")" }));
                 }
             });
+        };
+
+        var showChangePasswordForm = function (e) {
+            e.preventDefault();
+            bootbox.modal(changePasswordView.render().el, 'Change password');
         }
 
         EA.on('shoppingcart:fetch-success', function () {
@@ -170,6 +178,8 @@
         $('a.brand').click(showShoppingCart);
 
         $('a.order-history-menu').click(showOrderHistory);
+
+        $('button.btn-change-password').click(showChangePasswordForm);
 
         var fetchShoppingCart = function () {
             shoppingCart.fetch({
