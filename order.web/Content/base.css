@@ -126,3 +126,11 @@ div.loading-img img
 {
     margin-top: -12px;
 }
+div.next-page-button-container 
+{
+    text-align: center;
+}
+a.next-page-button 
+{
+    font-size: 40px;
+}

@@ -30,6 +30,8 @@ function ($, _, Backbone, GroupList, GroupListView, ErrorView, ProgressWinRing, 
         var searchItemListView = new ItemListView({ collection: searchItemList, 'shoppingCart': shoppingCart });
         var orderList = new OrderList();
         var orderListView = new OrderListView({ collection: orderList });
+        $('div.order-history-view').html(orderListView.render().el);
+        var orderHistoryFetched = false;
 
         var showError = function (err) {
             var errView = new ErrorView({ model: err });
@@ -124,19 +126,11 @@ function ($, _, Backbone, GroupList, GroupListView, ErrorView, ProgressWinRing, 
             $('div.item-view').hide();
             $('div.checkout-view').hide();
             $('div.order-history-view').show();
-            $('div.order-history-view').html(orderListView.render().el);
 
-            orderList.fetch({
-                beforeSend: function () {
-                    $('div.order-history-view').append(progress.render().el);
-                },
-                complete: function () {
-                    progress.remove();
-                },
-                error: function (model, xhr) {
-                    showError(new Backbone.Model({ errorMessage: xhr.statusText + " (" + xhr.status + ")" }));
-                }
-            });
+            if (orderHistoryFetched === false) {
+                orderListView.fetchOrder();
+                orderHistoryFetched = true;
+            }
         };
 
         var showChangePasswordForm = function (e) {

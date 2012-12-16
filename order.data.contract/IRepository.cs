@@ -15,5 +15,6 @@ namespace order.data.contract
         void Delete(T entity);
         void Delete(int id);
         IEnumerable<T> Where(System.Linq.Expressions.Expression<Func<T, bool>> expression);
+        int Count();
     }
 }

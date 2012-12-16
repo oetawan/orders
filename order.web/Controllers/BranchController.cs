@@ -11,7 +11,7 @@ using System.Web.Security;
 using WebMatrix.WebData;
 namespace order.web.Controllers
 {
-    [Authorize(Roles=RoleNames.CUSTOMER)]
+    [Authorize(Roles=RoleNames.ADMINISTRATOR_CUSTOMER)]
     public class BranchController : Controller
     {
         private IOrderUow orderUow;

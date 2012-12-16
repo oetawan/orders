@@ -10,6 +10,7 @@ namespace order.web.Models
         public const string CUSTOMER = "Customer";
         public const string BRANCH = "Branch";
         public const string ADMINISTRATOR_CUSTOMER = "Administrator, Customer";
+        public const string ADMINISTRATOR_CUSTOMER_BRANCH = "Administrator, Customer, Branch";
         public const string USER = "User";
     }
 }

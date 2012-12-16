@@ -9,20 +9,32 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using WebMatrix.WebData;
-
 namespace order.web.Controllers
 {
     [Authorize(Roles=RoleNames.ADMINISTRATOR)]
     public class CustomerController : Controller
     {
+        const int PAGE_SIZE = 3;
         private order.data.contract.IOrderUow Uow { get; set; }
         public CustomerController(IOrderUow uow)
         {
             Uow = uow;
         }
+
+        public JsonResult Count()
+        {
+            return Json(new {count=Uow.Customers.Count()}, JsonRequestBehavior.AllowGet);
+        }
+        
         public ActionResult Index()
         {
-            return View(Uow.Customers.GetAll().OrderByDescending<Customer,int>(cs => cs.Id));
+            //return View(Uow.Customers.GetAll().OrderByDescending<Customer,int>(cs => cs.Id).Take(PAGE_SIZE));
+            return View(Uow.Customers.GetAll().OrderByDescending<Customer, int>(cs => cs.Id));
+        }
+
+        public JsonResult NextPage(int skip)
+        {
+            return Json(Uow.Customers.GetAll().OrderByDescending<Customer,int>(cs => cs.Id).Skip(skip).Take(PAGE_SIZE), JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult NewCustomer()

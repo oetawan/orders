@@ -3,7 +3,7 @@
 
 define(['jquery', 'underscore', 'backbone', 'app/order/model/Group', 'app/order/model/Order'], function ($, _, Backbone, Group, Order) {
     return Backbone.Collection.extend({
-        url: 'order/all',
+        url: 'order/fetchorder',
         model: Order
     });
 });

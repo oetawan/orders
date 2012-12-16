@@ -80,5 +80,10 @@ namespace order.data
             if (entity == null) return;
             Delete(entity);
         }
+
+        public virtual int Count()
+        {
+            return DbSet.Count();
+        }
     }
 }

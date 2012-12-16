@@ -15,6 +15,7 @@ using StructureMap;
 using System.Transactions;
 namespace order.web.Controllers
 {
+    [Authorize(Roles=RoleNames.ADMINISTRATOR_CUSTOMER_BRANCH)]
     public class OrderController : Controller
     {
         const string ORDER_SESSION = "OrderSession";
@@ -203,6 +204,25 @@ namespace order.web.Controllers
                 IList<order.model.Order> result = orderUow.Orders.
                     Where(o => o.BranchId == OrderSession.Branch.Id).
                     OrderByDescending(o => o.OrderDate).ToList();
+
+                return Json(result, JsonRequestBehavior.AllowGet);
+            });
+        }
+
+        [HttpGet]
+        public JsonResult Count()
+        {
+            return Json(new {count= orderUow.Orders.Count()}, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public JsonResult FetchOrder(int skip, int pageSize)
+        {
+            return CatchPosibleExeption(() =>
+            {
+                IList<order.model.Order> result = orderUow.Orders.
+                    Where(o => o.BranchId == OrderSession.Branch.Id).
+                    OrderByDescending(o => o.OrderDate).Skip(skip).Take(pageSize).ToList();
 
                 return Json(result, JsonRequestBehavior.AllowGet);
             });
