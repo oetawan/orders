@@ -1,0 +1,30 @@
+﻿li.error-list-item 
+{
+    list-style-type: none;
+    color: red;
+}
+
+div.error-panel 
+{
+    text-align: center;
+    padding: 20px;
+    border: 1px solid #e2dede;
+}
+
+.checkout-view-confirm, .confirm-checkout-label 
+{
+    text-align: center;
+}
+
+.checkout-success-alert 
+{
+    text-align: center;
+    color: green;
+    font-size: 40px;
+    margin-top: 40px;
+}
+
+.checkout-success-alert h3
+{
+    margin-top: 20px;
+}

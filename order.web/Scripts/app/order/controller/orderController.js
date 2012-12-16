@@ -30,7 +30,6 @@ function ($, _, Backbone, GroupList, GroupListView, ErrorView, ProgressWinRing, 
         var searchItemListView = new ItemListView({ collection: searchItemList, 'shoppingCart': shoppingCart });
         var orderList = new OrderList();
         var orderListView = new OrderListView({ collection: orderList });
-        var changePasswordView = new ChangePasswordView();
 
         var showError = function (err) {
             var errView = new ErrorView({ model: err });
@@ -142,7 +141,9 @@ function ($, _, Backbone, GroupList, GroupListView, ErrorView, ProgressWinRing, 
 
         var showChangePasswordForm = function (e) {
             e.preventDefault();
-            bootbox.modal(changePasswordView.render().el, 'Change password');
+            var changePasswordView = new ChangePasswordView();
+            var box = bootbox.modal(changePasswordView.render().el, 'Change password');
+            changePasswordView.options.parent = box;
         }
 
         EA.on('shoppingcart:fetch-success', function () {

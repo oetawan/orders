@@ -69,6 +69,10 @@ namespace order.web
                 "~/Content/order.css", 
                 "~/Content/jquery.loadmask.css"));
 
+            bundles.Add(new StyleBundle("~/Content/css/manageaccount").Include(
+                "~/Content/manageaccount.css",
+                "~/Content/jquery.loadmask.css"));
+
             /*bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/site.css"));
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(
                         "~/Content/themes/base/jquery.ui.core.css",

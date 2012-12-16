@@ -77,7 +77,7 @@ function (_, Backbone, EA) {
                     NewPassword: $('input#newPassword', this.$el).val(),
                     ConfirmPassword: $('input#confirmPassword', this.$el).val()
                 };
-                $.ajax('Account/ChangePassword', {
+                $.ajax('/Account/ChangePassword', {
                     dataType: 'json',
                     type: 'post',
                     cache: 'false',
@@ -91,7 +91,7 @@ function (_, Backbone, EA) {
                     success: function (data) {
                         if (data.success === true) {
                             bootbox.alert('<div class="checkout-success-alert" aria-hidden="true" data-icon=""><h3>Password changed.</h3></div>');
-                            $('a.close', this.$el).click();
+                            that.options.parent.modal('hide');
                         } else {
                             if (data.errorMessage) {
                                 var html = $('<div class="error-panel"></div>');

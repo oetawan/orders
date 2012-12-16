@@ -5,11 +5,9 @@
     Layout = "~/Views/Shared/_LayoutApp.cshtml";
 }
 
-@section scripts
+@section styles
 {
-    <script type="text/javascript">
-        //$("#btn-edit-customer").addClass('btn btn-primary');
-    </script>
+     @Styles.Render("~/Content/css/manageaccount")
 }
 
 @section navbar
@@ -25,7 +23,6 @@
                 <a class="brand" href="#"><span aria-hidden="true" data-icon="b"></span> Customers</a>
                 <div class="nav-collapse collapse pull-right">
                     <ul class="nav">
-                        <li><a href="http://zainsbinstall.blob.core.windows.net/clickoneinstall/publish.htm"><i aria-hidden="true" data-icon=""></i>  <strong>Download Server Application</strong></a></li>
                         <li class="divider-vertical"></li>
                         <li><a href="/Customer/NewCustomer"><i aria-hidden="true" data-icon=""></i>  <strong>New Customer</strong></a></li>
                     </ul>
@@ -62,3 +59,9 @@
     }
     </div><!-- end of listview-container-->
 </div><!-- end of .metro.span12-->
+@section scripts
+{
+    <script type="text/javascript" src="@Url.Content("~/Scripts/underscore.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/backbone.min.js")"></script>
+    <script data-main="@Url.Content("~/Scripts/app/order/manageaccount")" type="text/javascript" src="@Url.Content("~/Scripts/require.js")"></script>
+}

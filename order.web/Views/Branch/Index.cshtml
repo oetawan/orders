@@ -3,6 +3,11 @@
     Layout = "~/Views/Shared/_LayoutApp.cshtml";
 }
 
+@section styles
+{
+     @Styles.Render("~/Content/css/manageaccount")
+}
+
 @section navbar
 {
     <div class="navbar">
@@ -16,6 +21,7 @@
                 <a class="brand" href="#"><span aria-hidden="true" data-icon=""></span> Manage Branch</a>
                 <div class="nav-collapse collapse pull-right">
                     <ul class="nav">
+                        <li><a href="http://zainsbinstall.blob.core.windows.net/clickoneinstall/publish.htm"><i aria-hidden="true" data-icon=""></i>  <strong>Download Service Bus</strong></a></li>
                         <li class="divider-vertical"></li>
                         <li><a href="/Branch/NewBranch"><i aria-hidden="true" data-icon=""></i>  <strong>New Branch</strong></a></li>
                     </ul>
@@ -57,4 +63,7 @@
             $('h3.nobranchfound').parent().css('text-align', 'center');
         });
     </script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/underscore.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/backbone.min.js")"></script>
+    <script data-main="@Url.Content("~/Scripts/app/order/manageaccount")" type="text/javascript" src="@Url.Content("~/Scripts/require.js")"></script>
 }
